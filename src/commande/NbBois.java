@@ -1,7 +1,7 @@
 package commande;
 
 public class NbBois {
-    private int nombre;
+    int nombre;
 
     public NbBois(int nombre) {
         if (nombre <= 0)

@@ -1,13 +1,14 @@
 package commande;
+import commande.exceptions.DimensionsInvalide;
 
 public class Dimensions {
-    private int longueur;
-    private int largeur;
+    int longueur;
+    int largeur;
 
 
     public Dimensions(int longueur, int largeur) {
-        if (longueur <= 0 || largeur <= 0)
-            throw new IllegalArgumentException("Les dimensions doivent être strictement positives");
+        if (longueur < 0 || largeur < 0 || longueur < largeur)
+            throw new DimensionsInvalide(this);
         this.longueur=longueur;
         this.largeur=largeur;
     }
