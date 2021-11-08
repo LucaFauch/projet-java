@@ -10,7 +10,7 @@ public class Date {
         this.jour=jour;
         this.mois=mois;
         this.annee=annee;
-        if(jour<1||jour>31||mois<1||mois>12||annee<2021){
+        if(jour<1||jour>31||mois<1||mois>12||annee<=2021){
             throw new DateInvalide(this);
         }
     }
@@ -43,7 +43,7 @@ public class Date {
 
     void setAnnee(int annee){
         this.annee=annee;
-        if(annee<2021){
+        if(annee<=2021){
             throw new DateInvalide(this);
         }
     }
