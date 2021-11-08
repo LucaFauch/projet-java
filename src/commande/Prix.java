@@ -11,8 +11,7 @@ public class Prix {
     public void setPrix(int prix) throws PrixInvalide {
         if(prix<0)
             throw new PrixInvalide(prix);
-        else
-            this.prix=prix;
+        this.prix=prix;
     }
 
     public int getPrix(){
