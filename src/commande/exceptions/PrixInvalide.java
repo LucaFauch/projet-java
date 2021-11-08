@@ -4,6 +4,7 @@ public class PrixInvalide extends RuntimeException{
     private int prix;
 
     public PrixInvalide (int prixinvalide){
-        super
+        super ("Prix invalide :"+prixinvalide);
+        this.prix=prixinvalide;
     }
 }
