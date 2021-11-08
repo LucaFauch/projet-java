@@ -1,4 +1,4 @@
 package commande;
 
-public class Client {
+public class Client extends Personne{
 }
