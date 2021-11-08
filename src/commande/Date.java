@@ -7,12 +7,12 @@ public class Date {
     int annee;
 
     Date(int jour, int mois, int annee) throws DateInvalide{
-        this.jour=jour;
-        this.mois=mois;
-        this.annee=annee;
         if(jour<1||jour>31||mois<1||mois>12||annee<=2021){
             throw new DateInvalide(this);
         }
+        this.jour=jour;
+        this.mois=mois;
+        this.annee=annee;
     }
 
     public int getJour(){
@@ -28,23 +28,27 @@ public class Date {
     }
 
     void setJour(int jour){
-        this.jour=jour;
         if(jour<1||jour>31){
             throw new DateInvalide(this);
         }
+        this.jour=jour;
     }
 
     void setMois(int mois){
-        this.mois=mois;
         if(mois<1||mois>12){
             throw new DateInvalide(this);
         }
+        this.mois=mois;
     }
 
     void setAnnee(int annee){
-        this.annee=annee;
         if(annee<=2021){
             throw new DateInvalide(this);
         }
+        this.annee=annee;
+    }
+
+    public String toString(){
+        return this.jour+"."+this.mois+"."+this.annee;
     }
 }
