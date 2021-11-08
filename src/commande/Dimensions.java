@@ -1,4 +1,5 @@
 package commande;
+import commande.exceptions.DateInvalide;
 import commande.exceptions.DimensionsInvalide;
 
 public class Dimensions {
@@ -19,6 +20,20 @@ public class Dimensions {
 
     public int getLargeur() {
         return largeur;
+    }
+
+    void setLongueur(int longueur){
+        this.longueur=longueur;
+        if(longueur<=0){
+            throw new DimensionsInvalide(this);
+        }
+    }
+
+    void setLargeur(int largeur){
+        this.largeur=largeur;
+        if(largeur<=0){
+            throw new DimensionsInvalide(this);
+        }
     }
 
 }
