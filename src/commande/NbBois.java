@@ -1,5 +1,4 @@
 package commande;
-import commande.exceptions.DimensionsInvalide;
 import commande.exceptions.NbBoisInvalide;
 
 public class NbBois {

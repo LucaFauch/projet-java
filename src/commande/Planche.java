@@ -1,4 +1,7 @@
 package commande;
 
-public class Planche {
+public class Planche extends Panneau{
+    Planche(Dimensions dimensions){
+        super(dimensions);
+    }
 }
