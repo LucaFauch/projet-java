@@ -1,8 +1,6 @@
 package commande;
-import commande.exceptions.DateInvalide;
-import commande.exceptions.DimensionsInvalide;
 
-class Dimensions implements Validable{
+public class Dimensions implements Validable{
     int longueur;
     int largeur;
 
@@ -19,24 +17,24 @@ class Dimensions implements Validable{
         this.largeur=largeur;
     }
 
-    public int getLongueur() {
+    int getLongueur() {
         return longueur;
     }
 
-    public int getLargeur() {
+    int getLargeur() {
         return largeur;
     }
 
     private void setLongueur(int longueur){
         if(longueur<=0){
-            throw new DimensionsInvalide(this);
+            throw new InvalideDimensions(this);
         }
         this.longueur=longueur;
     }
 
     private void setLargeur(int largeur){
         if(largeur<=0){
-            throw new DimensionsInvalide(this);
+            throw new InvalideDimensions(this);
         }
         this.largeur=largeur;
     }

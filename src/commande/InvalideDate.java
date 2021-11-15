@@ -1,10 +1,10 @@
-package commande.exceptions;
+package commande;
 import commande.Date;
 
-public class DateInvalide extends RuntimeException{
+public class InvalideDate extends RuntimeException{
     Date date;
 
-    public DateInvalide(Date date){
+    public InvalideDate(Date date){
         super("Date invalide. Date fournie : "+date);
         this.date=date;
     }

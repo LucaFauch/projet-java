@@ -1,5 +1,4 @@
 package commande;
-import commande.exceptions.PrixInvalide;
 
 class Prix implements Validable{
     int prix;

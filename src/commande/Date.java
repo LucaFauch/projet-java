@@ -1,7 +1,6 @@
 package commande;
-import commande.exceptions.DateInvalide;
 
-class Date implements Validable{
+public class Date implements Validable{
     int jour;
     int mois;
     int annee;
@@ -14,7 +13,7 @@ class Date implements Validable{
         }
     }
 
-    private Date(int jour, int mois, int annee) throws DateInvalide{
+    private Date(int jour, int mois, int annee) throws InvalideDate{
         this.jour=jour;
         this.mois=mois;
         this.annee=annee;

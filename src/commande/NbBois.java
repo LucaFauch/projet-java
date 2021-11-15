@@ -1,5 +1,4 @@
 package commande;
-import commande.exceptions.NbBoisInvalide;
 
 class NbBois implements Validable{
     int nombre;

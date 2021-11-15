@@ -1,5 +1,4 @@
 package commande;
-import commande.exceptions.IdInvalide;
 
 class Personne implements Validable{
     int id;
@@ -16,7 +15,7 @@ class Personne implements Validable{
         }
     }
 
-    Personne(int id, Prix prix, Bois bois, NbBois nombreBois, Date date) throws IdInvalide{
+    Personne(int id, Prix prix, Bois bois, NbBois nombreBois, Date date) throws InvalideId{
         this.id=id;
         this.prix=prix;
         this.bois=bois;
