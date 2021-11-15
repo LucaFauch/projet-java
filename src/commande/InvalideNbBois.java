@@ -2,7 +2,7 @@ package commande;
 import commande.NbBois;
 
 
-public class InvalideNbBois extends RuntimeException{
+class InvalideNbBois extends RuntimeException{
     NbBois nbBois;
 
     public InvalideNbBois(NbBois nbBois){

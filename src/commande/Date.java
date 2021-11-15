@@ -1,6 +1,6 @@
 package commande;
 
-class Date implements Validable{
+public class Date implements Validable{
     int jour;
     int mois;
     int annee;

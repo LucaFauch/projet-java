@@ -17,11 +17,11 @@ class NbBois implements Validable{
         this.nombre = nombre;
     }
 
-    int getNombre() {
+    public int getNombre() {
         return nombre;
     }
 
-    private void setNombre(int nombre) {
+    public void setNombre(int nombre) {
         if (nombre <= 0) {
             throw new InvalideNbBois(this);
         }

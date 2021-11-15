@@ -6,13 +6,13 @@ import javax.xml.stream.XMLStreamReader;
 import java.io.FileInputStream;
 import java.io.IOException;
 
-class XmlRead {
+public class XmlRead {
     int cost;
     int day;
     int month;
     int year;
 
-    private void XmlRead() {
+    void XmlRead() {
         FileInputStream file = null;
         try {
             file = new FileInputStream("C:/Users/Charles/IdeaProjects/projet-java/Etape 1/clients.xml");
@@ -54,16 +54,16 @@ class XmlRead {
     void setYear(int year){
         this.year=year;
     }
-    int getDay(){
+    public int getDay(){
         return this.day;
     }
-    int getMonth(){
+    public int getMonth(){
         return this.month;
     }
-    int getYear(){
+    public int getYear(){
         return this.year;
     }
-    int getCost(){
+    public int getCost(){
         return this.cost;
     }
 }

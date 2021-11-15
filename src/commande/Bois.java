@@ -7,7 +7,7 @@ class Bois {
         this.dimensions=dimensions;
     }
 
-    Dimensions getDimensions(){
+    public Dimensions getDimensions(){
         return this.dimensions;
     }
 

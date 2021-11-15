@@ -1,6 +1,6 @@
 package commande;
 
-class Dimensions {
+public class Dimensions {
     int longueur;
     int largeur;
 
