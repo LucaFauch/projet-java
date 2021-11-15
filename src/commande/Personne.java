@@ -1,11 +1,19 @@
 package commande;
 
-class Personne {
+class Personne implements Validable{
     int id;
     Prix prix;
     Bois bois;
     NbBois nombreBois;
     Date date;
+
+    public int isValid(){
+        if(id<0){
+            return 0;
+        }else{
+            return 1;
+        }
+    }
 
     Personne(int id, Prix prix, Bois bois, NbBois nombreBois, Date date) throws IdInvalide{
         if(id<0){
