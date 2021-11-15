@@ -2,7 +2,7 @@ package commande;
 
 public class BonDeCommande {
 
-    public BonDeCommande(){
+    private BonDeCommande(){
 
     }
 }

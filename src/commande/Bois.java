@@ -1,17 +1,17 @@
 package commande;
 
-public class Bois {
+class Bois {
     Dimensions dimensions;
 
-    Bois(Dimensions dimensions){
+    private Bois(Dimensions dimensions){
         this.dimensions=dimensions;
     }
 
-    Dimensions getDimensions(){
+    private Dimensions getDimensions(){
         return this.dimensions;
     }
 
-    void setDimensions(Dimensions dimensions){
+    private void setDimensions(Dimensions dimensions){
         this.dimensions=dimensions;
     }
 }

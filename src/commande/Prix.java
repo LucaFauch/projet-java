@@ -1,20 +1,20 @@
 package commande;
 import commande.exceptions.PrixInvalide;
 
-public class Prix {
+class Prix {
     int prix;
 
-    public Prix(int prix){
+    private Prix(int prix){
         setPrix(prix);
     }
 
-    public void setPrix(int prix) throws PrixInvalide {
+    private void setPrix(int prix) throws PrixInvalide {
         if(prix<0)
             throw new PrixInvalide(prix);
         this.prix=prix;
     }
 
-    public int getPrix(){
+    private int getPrix(){
         return this.prix;
     }
 

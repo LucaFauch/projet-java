@@ -1,4 +1,4 @@
 package commande;
 
-public class Decoupe {
+class Decoupe {
 }

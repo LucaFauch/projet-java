@@ -1,14 +1,14 @@
 package commande;
 import commande.exceptions.IdInvalide;
 
-public class Personne {
+class Personne {
     int id;
     Prix prix;
     Bois bois;
     NbBois nombreBois;
     Date date;
 
-    Personne(int id, Prix prix, Bois bois, NbBois nombreBois, Date date) throws IdInvalide{
+    private Personne(int id, Prix prix, Bois bois, NbBois nombreBois, Date date) throws IdInvalide{
         if(id<0){
             throw new IdInvalide(id);
         }
@@ -19,38 +19,38 @@ public class Personne {
         this.date=date;
     }
 
-    int getId(){
+    private int getId(){
         return this.id;
     }
 
-    Bois getBois(){
+    private Bois getBois(){
         return this.bois;
     }
 
-    NbBois getNombreBois(){
+    private NbBois getNombreBois(){
         return this.nombreBois;
     }
 
-    Date getDate(){
+    private Date getDate(){
         return this.date;
     }
 
-    void setId(int id) throws IdInvalide{
+    private void setId(int id) throws IdInvalide{
         if(id<0){
             throw new IdInvalide(id);
         }
         this.id=id;
     }
 
-    void setBois(Bois bois){
+    private void setBois(Bois bois){
         this.bois=bois;
     }
 
-    void setNombreBois(NbBois nombreBois){
+    private void setNombreBois(NbBois nombreBois){
         this.nombreBois=nombreBois;
     }
 
-    void setDate(Date date){
+    private void setDate(Date date){
         this.date=date;
     }
 }
