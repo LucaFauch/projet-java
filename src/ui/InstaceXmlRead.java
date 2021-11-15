@@ -1,5 +1,8 @@
 package ui;
 
 public class InstaceXmlRead {
-    XmlRead a = new XmlRead();
+    XmlRead a;
+    static XmlRead newInstance() {
+        XmlRead a=new XmlRead();
+    }
 }
