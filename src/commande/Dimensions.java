@@ -7,7 +7,7 @@ class Dimensions {
 
     Dimensions(int longueur, int largeur) {
         if (longueur < 0 || largeur < 0 || longueur < largeur)
-            throw new DimensionsInvalide(this);
+            throw new InvalideDimensions(this);
         this.longueur=longueur;
         this.largeur=largeur;
     }
@@ -22,14 +22,14 @@ class Dimensions {
 
     private void setLongueur(int longueur){
         if(longueur<=0){
-            throw new DimensionsInvalide(this);
+            throw new InvalideDimensions(this);
         }
         this.longueur=longueur;
     }
 
     private void setLargeur(int largeur){
         if(largeur<=0){
-            throw new DimensionsInvalide(this);
+            throw new InvalideDimensions(this);
         }
         this.largeur=largeur;
     }

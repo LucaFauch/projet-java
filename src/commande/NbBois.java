@@ -13,7 +13,7 @@ class NbBois implements Validable{
 
     NbBois(int nombre) {
         if (nombre <= 0)
-            throw new NbBoisInvalide(this);
+            throw new InvalideNbBois(this);
         this.nombre = nombre;
     }
 
@@ -23,7 +23,7 @@ class NbBois implements Validable{
 
     private void setNombre(int nombre) {
         if (nombre <= 0) {
-            throw new NbBoisInvalide(this);
+            throw new InvalideNbBois(this);
         }
         this.nombre = nombre;
     }

@@ -15,9 +15,9 @@ class Personne implements Validable{
         }
     }
 
-    Personne(int id, Prix prix, Bois bois, NbBois nombreBois, Date date) throws IdInvalide{
+    Personne(int id, Prix prix, Bois bois, NbBois nombreBois, Date date) throws InvalideId {
         if(id<0){
-            throw new IdInvalide(id);
+            throw new InvalideId(id);
         }
         this.id=id;
         this.prix=prix;
@@ -42,9 +42,9 @@ class Personne implements Validable{
         return this.date;
     }
 
-    private void setId(int id) throws IdInvalide{
+    private void setId(int id) throws InvalideId {
         if(id<0){
-            throw new IdInvalide(id);
+            throw new InvalideId(id);
         }
         this.id=id;
     }

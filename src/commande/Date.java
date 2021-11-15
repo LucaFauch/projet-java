@@ -13,9 +13,9 @@ class Date implements Validable{
         }
     }
 
-    private Date(int jour, int mois, int annee) throws DateInvalide{
+    private Date(int jour, int mois, int annee) throws InvalideDate {
         if(jour<1||jour>31||mois<1||mois>12||annee<=2021){
-            throw new DateInvalide(this);
+            throw new InvalideDate(this);
         }
         this.jour=jour;
         this.mois=mois;
@@ -36,21 +36,21 @@ class Date implements Validable{
 
     private void setJour(int jour){
         if(jour<1||jour>31){
-            throw new DateInvalide(this);
+            throw new InvalideDate(this);
         }
         this.jour=jour;
     }
 
     private void setMois(int mois){
         if(mois<1||mois>12){
-            throw new DateInvalide(this);
+            throw new InvalideDate(this);
         }
         this.mois=mois;
     }
 
     private void setAnnee(int annee){
         if(annee<=2021){
-            throw new DateInvalide(this);
+            throw new InvalideDate(this);
         }
         this.annee=annee;
     }

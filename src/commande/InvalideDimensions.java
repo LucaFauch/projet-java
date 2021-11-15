@@ -1,10 +1,10 @@
 package commande;
 import commande.Dimensions;
 
-public class DimensionsInvalide extends RuntimeException{
+public class InvalideDimensions extends RuntimeException{
     Dimensions dimensions;
 
-    public DimensionsInvalide(Dimensions dimensions){
+    public InvalideDimensions(Dimensions dimensions){
         super("Dimensions invalides. Dimensions fournies : "+dimensions.getLongueur()+"."+dimensions.getLargeur());
         this.dimensions=dimensions;
     }

@@ -19,9 +19,9 @@ class Prix implements Validable{
         return this.prix;
     }
 
-    private void setPrix(int prix) throws PrixInvalide {
+    private void setPrix(int prix) throws InvalidePrix {
         if(prix<0)
-            throw new PrixInvalide(prix);
+            throw new InvalidePrix(prix);
         this.prix=prix;
     }
 }
