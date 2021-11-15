@@ -7,18 +7,18 @@ class Dimensions {
     int largeur;
 
 
-    private Dimensions(int longueur, int largeur) {
+    Dimensions(int longueur, int largeur) {
         if (longueur < 0 || largeur < 0 || longueur < largeur)
             throw new DimensionsInvalide(this);
         this.longueur=longueur;
         this.largeur=largeur;
     }
 
-    private int getLongueur() {
+    public int getLongueur() {
         return longueur;
     }
 
-    private int getLargeur() {
+    public int getLargeur() {
         return largeur;
     }
 

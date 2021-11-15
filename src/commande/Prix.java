@@ -12,7 +12,7 @@ class Prix implements Validable{
         }
     }
 
-    private Prix(int prix){
+    Prix(int prix){
         setPrix(prix);
     }
 
@@ -22,7 +22,7 @@ class Prix implements Validable{
         this.prix=prix;
     }
 
-    private int getPrix(){
+    public int getPrix(){
         return this.prix;
     }
 

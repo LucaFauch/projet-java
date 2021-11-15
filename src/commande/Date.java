@@ -23,15 +23,15 @@ class Date implements Validable{
         this.annee=annee;
     }
 
-    private int getJour(){
+    public int getJour(){
         return this.jour;
     }
 
-    private int getMois(){
+    public int getMois(){
         return this.mois;
     }
 
-    private int getAnnee(){
+    public int getAnnee(){
         return this.annee;
     }
 
