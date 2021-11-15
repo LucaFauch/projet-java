@@ -1,5 +1,4 @@
 package commande;
-import commande.exceptions.IdInvalide;
 
 class Personne {
     int id;
@@ -19,19 +18,19 @@ class Personne {
         this.date=date;
     }
 
-    public int getId(){
+    int getId(){
         return this.id;
     }
 
-    public Bois getBois(){
+    Bois getBois(){
         return this.bois;
     }
 
-    public NbBois getNombreBois(){
+    NbBois getNombreBois(){
         return this.nombreBois;
     }
 
-    public Date getDate(){
+    Date getDate(){
         return this.date;
     }
 

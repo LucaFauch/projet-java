@@ -1,5 +1,4 @@
 package commande;
-import commande.exceptions.DateInvalide;
 
 class Date {
     int jour;
@@ -15,15 +14,15 @@ class Date {
         this.annee=annee;
     }
 
-    public int getJour(){
+    int getJour(){
         return this.jour;
     }
 
-    public int getMois(){
+    int getMois(){
         return this.mois;
     }
 
-    public int getAnnee(){
+    int getAnnee(){
         return this.annee;
     }
 

@@ -1,11 +1,11 @@
-package commande.exceptions;
+package commande;
 import commande.NbBois;
 
 
-class NbBoisInvalide extends RuntimeException{
+public class NbBoisInvalide extends RuntimeException{
     NbBois nbBois;
 
-    private NbBoisInvalide(NbBois nbBois){
+    public NbBoisInvalide(NbBois nbBois){
         super("Nombre de bois invalide. Nombre fourni : "+nbBois.getNombre());
         this.nbBois=nbBois;
     }

@@ -3,11 +3,11 @@ package commande;
 class Bois {
     Dimensions dimensions;
 
-    private Bois(Dimensions dimensions){
+    Bois(Dimensions dimensions){
         this.dimensions=dimensions;
     }
 
-    public Dimensions getDimensions(){
+    Dimensions getDimensions(){
         return this.dimensions;
     }
 

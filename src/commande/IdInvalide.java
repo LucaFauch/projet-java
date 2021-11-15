@@ -1,4 +1,4 @@
-package commande.exceptions;
+package commande;
 
 public class IdInvalide extends RuntimeException{
     int id;

@@ -1,4 +1,4 @@
-package commande.exceptions;
+package commande;
 import commande.Dimensions;
 
 public class DimensionsInvalide extends RuntimeException{

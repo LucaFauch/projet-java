@@ -1,4 +1,4 @@
-package commande.exceptions;
+package commande;
 import commande.Date;
 
 public class DateInvalide extends RuntimeException{

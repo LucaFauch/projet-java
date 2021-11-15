@@ -1,5 +1,4 @@
 package commande;
-import commande.exceptions.NbBoisInvalide;
 
 class NbBois {
     int nombre;
@@ -10,11 +9,11 @@ class NbBois {
         this.nombre = nombre;
     }
 
-    public int getNombre() {
+    int getNombre() {
         return nombre;
     }
 
-    public setNombre(int nombre) {
+    private void setNombre(int nombre) {
         if (nombre <= 0) {
             throw new NbBoisInvalide(this);
         }

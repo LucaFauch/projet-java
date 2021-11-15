@@ -1,6 +1,4 @@
 package commande;
-import commande.exceptions.DateInvalide;
-import commande.exceptions.DimensionsInvalide;
 
 class Dimensions {
     int longueur;
@@ -14,11 +12,11 @@ class Dimensions {
         this.largeur=largeur;
     }
 
-    public int getLongueur() {
+    int getLongueur() {
         return longueur;
     }
 
-    public int getLargeur() {
+    int getLargeur() {
         return largeur;
     }
 
