@@ -4,7 +4,7 @@ import commande.exceptions.PrixInvalide;
 class Prix {
     int prix;
 
-    private Prix(int prix){
+    Prix(int prix){
         setPrix(prix);
     }
 
@@ -14,7 +14,7 @@ class Prix {
         this.prix=prix;
     }
 
-    private int getPrix(){
+    public int getPrix(){
         return this.prix;
     }
 

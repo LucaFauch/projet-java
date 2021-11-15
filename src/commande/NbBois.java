@@ -4,7 +4,7 @@ import commande.exceptions.NbBoisInvalide;
 class NbBois {
     int nombre;
 
-    private NbBois(int nombre) {
+    NbBois(int nombre) {
         if (nombre <= 0)
             throw new NbBoisInvalide(this);
         this.nombre = nombre;

@@ -8,7 +8,7 @@ class Personne {
     NbBois nombreBois;
     Date date;
 
-    private Personne(int id, Prix prix, Bois bois, NbBois nombreBois, Date date) throws IdInvalide{
+    Personne(int id, Prix prix, Bois bois, NbBois nombreBois, Date date) throws IdInvalide{
         if(id<0){
             throw new IdInvalide(id);
         }
@@ -19,19 +19,19 @@ class Personne {
         this.date=date;
     }
 
-    private int getId(){
+    public int getId(){
         return this.id;
     }
 
-    private Bois getBois(){
+    public Bois getBois(){
         return this.bois;
     }
 
-    private NbBois getNombreBois(){
+    public NbBois getNombreBois(){
         return this.nombreBois;
     }
 
-    private Date getDate(){
+    public Date getDate(){
         return this.date;
     }
 
