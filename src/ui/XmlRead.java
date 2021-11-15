@@ -1,5 +1,4 @@
 package ui;
-import commande.*;
 
 import javax.xml.stream.XMLInputFactory;
 import javax.xml.stream.XMLStreamException;
@@ -7,13 +6,13 @@ import javax.xml.stream.XMLStreamReader;
 import java.io.FileInputStream;
 import java.io.IOException;
 
-public class XmlRead {
-    public int prix;
-    public int jour;
-    public int mois;
-    public int annee;
+class XmlRead {
+    int cost;
+    int day;
+    int month;
+    int year;
 
-    public void XmlRead() {
+    private void XmlRead() {
         FileInputStream file = null;
         try {
             file = new FileInputStream("C:/Users/Charles/IdeaProjects/projet-java/Etape 1/clients.xml");
@@ -27,11 +26,11 @@ public class XmlRead {
                 reader.nextTag(); //On regarde la première commande de planche demandée
 
                 //String commande = "Commande n°" + reader.getAttributeValue(0) + " de " + reader.getAttributeValue(1) + " planches à livrer pour le " + reader.getAttributeValue(2) + " au prix maximal de " + reader.getAttributeValue(3);
-                this.prix = Integer.parseInt(reader.getAttributeValue(3));
+                setCost(Integer.parseInt(reader.getAttributeValue(3)));
                 String[] date = reader.getAttributeValue(2).split(".");
-                this.jour = Integer.parseInt(date[0]);
-                this.mois = Integer.parseInt(date[1]);
-                this.annee = Integer.parseInt(date[2]);
+                setDay(Integer.parseInt(date[0]));
+                setMonth(Integer.parseInt(date[1]));
+                setYear(Integer.parseInt(date[2]));
                 //System.out.println(commande);
             }
         } catch (IOException exc) {
@@ -43,4 +42,28 @@ public class XmlRead {
         }
     }
 
+    void setCost (int cost){
+        this.cost=cost;
+    }
+    void setDay(int day){
+        this.day=day;
+    }
+    void setMonth(int month){
+        this.month=month;
+    }
+    void setYear(int year){
+        this.year=year;
+    }
+    int getDay(){
+        return this.day;
+    }
+    int getMonth(){
+        return this.month;
+    }
+    int getYear(){
+        return this.year;
+    }
+    int getCost(){
+        return this.cost;
+    }
 }
