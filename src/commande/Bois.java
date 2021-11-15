@@ -6,12 +6,5 @@ class Bois {
     private Bois(Dimensions dimensions){
         this.dimensions=dimensions;
     }
-
-    public Dimensions getDimensions(){
-        return this.dimensions;
-    }
-
-    private void setDimensions(Dimensions dimensions){
-        this.dimensions=dimensions;
-    }
+    
 }

@@ -2,14 +2,19 @@ package commande;
 import commande.exceptions.DateInvalide;
 import commande.exceptions.DimensionsInvalide;
 
-class Dimensions {
+class Dimensions implements Validable{
     int longueur;
     int largeur;
 
-
+    public int isValid(){
+        if (this.longueur < 0 || this.largeur < 0 || this.longueur < this.largeur){
+            return 0;
+        }else{
+            return 1;
+        }
+    }
+    
     Dimensions(int longueur, int largeur) {
-        if (longueur < 0 || largeur < 0 || longueur < largeur)
-            throw new DimensionsInvalide(this);
         this.longueur=longueur;
         this.largeur=largeur;
     }
