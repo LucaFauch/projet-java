@@ -1,8 +1,8 @@
 package commande;
 
 public class Dimensions implements Validable{
-    int longueur;
-    int largeur;
+    float longueur;
+    float largeur;
 
     public int isValid(){
         if (this.longueur < 0 || this.largeur < 0 || this.longueur < this.largeur){
@@ -12,7 +12,7 @@ public class Dimensions implements Validable{
         }
     }
     
-    Dimensions(int longueur, int largeur) {
+    Dimensions(float longueur, float largeur) {
         this.longueur=longueur;
         this.largeur=largeur;
     }

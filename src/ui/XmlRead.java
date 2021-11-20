@@ -1,69 +1,94 @@
-package ui;
-
+package commande;
 import javax.xml.stream.XMLInputFactory;
+import javax.xml.stream.XMLStreamConstants;
 import javax.xml.stream.XMLStreamException;
 import javax.xml.stream.XMLStreamReader;
 import java.io.FileInputStream;
-import java.io.IOException;
+import java.io.FileNotFoundException;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
-public class XmlRead {
-    int cost;
-    int day;
-    int month;
-    int year;
+public class XmlRead
+{
+    public static void readXml(String filename)
+    {
+        try
+        {
+            FileInputStream file = new FileInputStream(filename);
+            XMLStreamReader reader = XMLInputFactory.newInstance().createXMLStreamReader(file);
+            while(reader.hasNext())
+            {
+                if(reader.next() == XMLStreamConstants.START_ELEMENT)
+                {
+                    if(reader.getName().toString() == "client")
+                    {
+                        System.out.println("nouveau client");
+                        Client c = readClient(reader);
 
-    void XmlRead() {
-        FileInputStream file = null;
-        try {
-            file = new FileInputStream("C:/Users/Charles/IdeaProjects/projet-java/Etape 1/clients.xml");
-            XMLInputFactory xmlInFact = XMLInputFactory.newInstance();
-            XMLStreamReader reader = xmlInFact.createXMLStreamReader(file);
-            if (reader.hasNext()) {
-
-                reader.next(); // On regarde la liste des clients
-
-                reader.nextTag(); //On regarde le premier client
-                reader.nextTag(); //On regarde la première commande de planche demandée
-
-                //String commande = "Commande n°" + reader.getAttributeValue(0) + " de " + reader.getAttributeValue(1) + " planches à livrer pour le " + reader.getAttributeValue(2) + " au prix maximal de " + reader.getAttributeValue(3);
-                setCost(Integer.parseInt(reader.getAttributeValue(3)));
-                String[] date = reader.getAttributeValue(2).split(".");
-                setDay(Integer.parseInt(date[0]));
-                setMonth(Integer.parseInt(date[1]));
-                setYear(Integer.parseInt(date[2]));
-                //System.out.println(commande);
+                    }
+                }
             }
-        } catch (IOException exc) {
-
-            System.out.print("Erreur IO: " + exc.toString());
-        } catch (XMLStreamException exc) {
-            System.out.print("Erreur XML: " + exc.toString());
-
+        }
+        catch (FileNotFoundException e)
+        {
+            e.printStackTrace();
+        }
+        catch (XMLStreamException e)
+        {
+            e.printStackTrace();
         }
     }
+    static Client readClient(XMLStreamReader reader) throws XMLStreamException
+    {
+        int id = Integer.parseInt(reader.getAttributeValue(0));
+        List<Planche> listPlanche = new ArrayList<>();
+        while(reader.hasNext())
+        {
+            System.out.println("je suis dans le while");
+            if(reader.next() == XMLStreamConstants.START_ELEMENT)
+            {
+                if(reader.getName().toString() == "planche")
+                {
+                    System.out.println("nouvelle planche");
+                    Planche p = readPlanche(reader);
+                    listPlanche.add(p);
+                }
 
-    void setCost (int cost){
-        this.cost=cost;
+            }
+        }
+        return new Client(id,listPlanche);
     }
-    void setDay(int day){
-        this.day=day;
+
+    static Planche readPlanche(XMLStreamReader reader) throws XMLStreamException
+    {
+        int id=Integer.parseInt(reader.getAttributeValue(0));
+        int nombre=Integer.parseInt(reader.getAttributeValue(1));
+        String dates =(reader.getAttributeValue(2));
+        System.out.println(dates);
+        String[] allDates = dates.split("\\.");
+        System.out.println(Arrays.toString(allDates));
+        int date = Integer.parseInt(allDates[0]);
+        System.out.println(date);
+        float prix=Float.parseFloat(reader.getAttributeValue(3));;
+        List<Dimensions> listDimensions = new ArrayList<>();
+        while(reader.hasNext())
+        {
+            if(reader.next() == XMLStreamConstants.START_ELEMENT)
+            {
+                if(reader.getName().toString() == "dim")
+                {
+                    Dimensions dim=readDimensions(reader);
+                    listDimensions.add(dim);
+                }
+
+            }
+        }
+        return new Planche(listDimensions.get(0),id,nombre,date,prix);
     }
-    void setMonth(int month){
-        this.month=month;
-    }
-    void setYear(int year){
-        this.year=year;
-    }
-    public int getDay(){
-        return this.day;
-    }
-    public int getMonth(){
-        return this.month;
-    }
-    public int getYear(){
-        return this.year;
-    }
-    public int getCost(){
-        return this.cost;
+    static Dimensions readDimensions (XMLStreamReader reader) throws XMLStreamException{
+        float L = Float.parseFloat(reader.getAttributeValue(0));
+        float l = Float.parseFloat(reader.getAttributeValue(1));
+        return new Dimensions(L,l);
     }
 }
