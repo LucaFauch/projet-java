@@ -45,7 +45,6 @@ public class XmlRead
         List<Planche> listPlanche = new ArrayList<>();
         while(reader.hasNext())
         {
-            System.out.println("je suis dans le while");
             if(reader.next() == XMLStreamConstants.START_ELEMENT)
             {
                 if(reader.getName().toString() == "planche")
@@ -82,6 +81,9 @@ public class XmlRead
                     listDimensions.add(dim);
                 }
 
+            }
+            if(reader.next() == XMLStreamConstants.END_ELEMENT){
+                return new Planche(listDimensions.get(0),id,nombre,date,prix);
             }
         }
         return new Planche(listDimensions.get(0),id,nombre,date,prix);
