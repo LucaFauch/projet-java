@@ -6,8 +6,7 @@ public class Factory {
         return new Date(jour,mois,annee);
     }
 
-    public Prix initializePrix(String prix){
-        System.out.println(prix);
+    public Prix initializePrix(float prix){
         return new Prix(prix);
     }
 
@@ -24,6 +23,7 @@ public class Factory {
     }
 
     public Dimensions initializeDimensions(int longueur, int largeur){
+        System.out.println(longueur);
         return new Dimensions(longueur, largeur);
     }
 
@@ -32,7 +32,6 @@ public class Factory {
     }
 
     public Client initializeClient(int id, Generable prix, Generable bois, Generable nombreBois, Generable date){
-        System.out.println(id);
         return new Client(id,(Prix)prix,(Bois)bois,(NbBois)nombreBois,(Date)date);
     }
     public Factory (){

@@ -71,20 +71,25 @@ public class XmlRead
                         annee = Integer.parseInt(allDates[2]);
                         prix=Float.parseFloat(reader.getAttributeValue(3));
                         if (reader.next() == XMLStreamConstants.START_ELEMENT) {
+                            System.out.println(reader.getName().toString());
                             if (reader.getName().toString() == "dim") {
-                                String LString = (reader.getAttributeValue(0));
-                                String lString = (reader.getAttributeValue(1));
-                                String[] LDim = LString.split("\\.");
-                                String[] lDim = lString.split("\\.");
-                                L = Integer.parseInt(LDim[0]);
-                                l = Integer.parseInt(lDim[0]);
+                                //try {
+                                    String LString = (reader.getAttributeValue(0));
+                                    String lString = (reader.getAttributeValue(1));
+                                    String[] LDim = LString.split("\\.");
+                                    String[] lDim = lString.split("\\.");
+                                    L = Integer.parseInt(LDim[0]);
+                                    l = Integer.parseInt(lDim[0]);
+                                /*}
+                                catch (NumberFormatException e){
+                                    System.out.println("Mauvais Type dans les arguments de dim");
+                                }*/
                             }
 
                         }
                     }
-                    catch (InvalideXmlRead e){
-                        System.out.println("Mauvais Type");
-                        prix=10.0;
+                    catch (NumberFormatException e){
+                        System.out.println("Mauvais Type dans les arguments de planche");
                     }
                 }
                 
