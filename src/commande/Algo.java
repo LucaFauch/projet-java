@@ -2,7 +2,7 @@ package commande;
 
 import ui.Reader;
 
-/*class Algo implements Reader{
+class Algo{
     int benef;
     Client client;
     //Fournisseur fournisseur;
@@ -14,10 +14,8 @@ import ui.Reader;
         //this.fournisseur=fournisseur;
         this.panneau=panneau;
     }
-    void initializeProblem(String client,String fournisseur){
-        Reader v = null;
+    /*void initializeProblem(String client,String fournisseur){
         Client c=readXml("client.xml");
         System.out.println(c);
-    }
+    }*/
 }
-*/

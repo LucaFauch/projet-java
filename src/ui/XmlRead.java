@@ -14,7 +14,7 @@ import java.util.List;
 
 public class XmlRead
 {
-    public static void readXml(String filename)
+    public static void readXml(String filename,Factory f)
     {
         try
         {
@@ -27,7 +27,7 @@ public class XmlRead
                     if(reader.getName().toString() == "client")
                     {
                         System.out.println("nouveau client");
-                        readClient(reader,factory);
+                        readClient(reader,f);
 
                     }
                 }
@@ -60,27 +60,31 @@ public class XmlRead
             {
                 if(reader.getName().toString() == "planche")
                 {
-                    idPlanche=Integer.parseInt(reader.getAttributeValue(0));
-                    nombre=Integer.parseInt(reader.getAttributeValue(1));
-                    String dates =(reader.getAttributeValue(2));
-                    String[] allDates = dates.split("\\.");
-                    jour = Integer.parseInt(allDates[0]);
-                    mois = Integer.parseInt(allDates[1]);
-                    annee = Integer.parseInt(allDates[2]);
-                    prix=Float.parseFloat(reader.getAttributeValue(3));
-                    while(reader.hasNext())
-                    {
-                        if(reader.next() == XMLStreamConstants.START_ELEMENT)
-                        {
-                            if(reader.getName().toString() == "dim")
-                            {
-                                L = Integer.parseInt(reader.getAttributeValue(0));
-                                l = Integer.parseInt(reader.getAttributeValue(1));
+                    try {
+                        System.out.println("nouvelle planche");
+                        idPlanche = Integer.parseInt(reader.getAttributeValue(0));
+                        nombre = Integer.parseInt(reader.getAttributeValue(1));
+                        String dates = (reader.getAttributeValue(2));
+                        String[] allDates = dates.split("\\.");
+                        jour = Integer.parseInt(allDates[0]);
+                        mois = Integer.parseInt(allDates[1]);
+                        annee = Integer.parseInt(allDates[2]);
+                        prix=Float.parseFloat(reader.getAttributeValue(3));
+                        if (reader.next() == XMLStreamConstants.START_ELEMENT) {
+                            if (reader.getName().toString() == "dim") {
+                                String LString = (reader.getAttributeValue(0));
+                                String lString = (reader.getAttributeValue(1));
+                                String[] LDim = LString.split("\\.");
+                                String[] lDim = lString.split("\\.");
+                                L = Integer.parseInt(LDim[0]);
+                                l = Integer.parseInt(lDim[0]);
                             }
 
                         }
-                        if(reader.next() == XMLStreamConstants.END_ELEMENT){
-                        }
+                    }
+                    catch (InvalideXmlRead e){
+                        System.out.println("Mauvais Type");
+                        prix=10.0;
                     }
                 }
                 
