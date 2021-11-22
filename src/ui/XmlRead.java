@@ -28,7 +28,17 @@ public class XmlRead
                     {
                         System.out.println("nouveau client");
                         readClient(reader,f);
-
+                        return;
+                    }
+                    if (reader.getName().toString() == "fournisseur"){
+                        System.out.println("nouveau fournisseur");
+                        readFournisseur(reader,f);
+                        return;
+                    }
+                    if (reader.getName().toString() == "decoupe"){
+                        System.out.println("Nouvelle découpe");
+                        readDecoupe(reader,f);
+                        return;
                     }
                 }
             }
@@ -99,6 +109,116 @@ public class XmlRead
                     }
                     catch (NumberFormatException e){
                         System.out.println("Mauvais Type dans les arguments de dim");
+                    }
+                }
+
+            }
+        }
+        return list;
+    }
+
+    static ArrayList<Generable> readFournisseur(XMLStreamReader reader, Factory f) throws XMLStreamException{
+        ArrayList<Generable> list = new ArrayList<>();
+        int idFournisseur = Integer.parseInt(reader.getAttributeValue(0));
+        int L=0;
+        int l=0;
+        int idPanneau=0;
+        int nombre=0;
+        int jour=0;
+        int mois=0;
+        int annee=0;
+        float prix=0;
+        int nbFournisseur=1;
+        while(reader.hasNext())
+        {
+            if(reader.next() == XMLStreamConstants.START_ELEMENT)
+            {
+                if(reader.getName().toString() == "fournisseur"){
+                    System.out.println("nouveau fournisseur");
+                    list.add(f.initializeClient(idFournisseur,list.get(1),list.get(5),list.get(2),list.get(0)));
+                    idFournisseur = Integer.parseInt(reader.getAttributeValue(0));;
+                }
+                if(reader.getName().toString() == "panneau")
+                {
+                    try {
+                        nombre++;
+                        System.out.println("nouveau panneau");
+                        idPanneau = Integer.parseInt(reader.getAttributeValue(0));
+                        nombre = Integer.parseInt(reader.getAttributeValue(1));
+                        String dates = (reader.getAttributeValue(2));
+                        String[] allDates = dates.split("\\.");
+                        jour = Integer.parseInt(allDates[0]);
+                        mois = Integer.parseInt(allDates[1]);
+                        annee = Integer.parseInt(allDates[2]);
+                        list.add(f.initializeDate(jour, mois, annee));
+                        prix=Float.parseFloat(reader.getAttributeValue(3));
+                        list.add(f.initializePrix(prix));
+                        list.add(f.initializeNbBois(nombre));
+                    }
+                    catch (NumberFormatException e){
+                        System.out.println("Mauvais Type dans les arguments de panneau");
+                    }
+                }
+                if (reader.getName().toString() == "dim") {
+                    try {
+                        String LString = (reader.getAttributeValue(0));
+                        String lString = (reader.getAttributeValue(1));
+                        String[] LDim = LString.split("\\.");
+                        String[] lDim = lString.split("\\.");
+                        L = Integer.parseInt(LDim[0]);
+                        l = Integer.parseInt(lDim[0]);
+                        list.add(f.initializeDimensions(L,l));
+                        list.add(f.initializePlanche(list.get(3),idPanneau));
+                        list.add(f.initializeBois(list.get(3),idPanneau));
+                    }
+                    catch (NumberFormatException e){
+                        System.out.println("Mauvais Type dans les arguments de dim");
+                    }
+                }
+
+            }
+        }
+        return list;
+    }
+
+    static ArrayList<Generable> readDecoupe(XMLStreamReader reader, Factory f) throws XMLStreamException{
+        ArrayList<Generable> list = new ArrayList<>();
+        int idFournisseur =0;
+        int idClient =0;
+        int x=0;
+        int y=0;
+        int idPlanche=0;
+        int idPanneau=0;
+        while(reader.hasNext())
+        {
+            if(reader.next() == XMLStreamConstants.START_ELEMENT)
+            {
+                if(reader.getName().toString() == "fournisseur"){
+                    try {
+                        idFournisseur=Integer.parseInt(reader.getAttributeValue(0));
+                        idPanneau =Integer.parseInt(reader.getAttributeValue(1));
+                    }
+                    catch (NumberFormatException e){
+                        System.out.println("Mauvais Type dans les arguments de fournisseur");
+                    }
+                }
+                if(reader.getName().toString() == "client")
+                {
+                    try {
+                        idClient=Integer.parseInt(reader.getAttributeValue(0));
+                        idPlanche=Integer.parseInt(reader.getAttributeValue(1));
+                    }
+                    catch (NumberFormatException e){
+                        System.out.println("Mauvais Type dans les arguments de client");
+                    }
+                }
+                if (reader.getName().toString() == "position") {
+                    try {
+                        x=Math.round(Float.parseFloat(reader.getAttributeValue(0)));
+                        y=Math.round(Float.parseFloat(reader.getAttributeValue(1)));
+                    }
+                    catch (NumberFormatException e){
+                        System.out.println("Mauvais Type dans les arguments de position");
                     }
                 }
 
