@@ -23,7 +23,6 @@ public class Factory {
     }
 
     public Dimensions initializeDimensions(int longueur, int largeur){
-        System.out.println(longueur);
         return new Dimensions(longueur, largeur);
     }
 

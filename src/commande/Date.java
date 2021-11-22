@@ -14,9 +14,18 @@ class Date implements Validable,Generable{
     }
 
     Date(int jour, int mois, int annee) throws InvalideDate{
-        this.jour=jour;
-        this.mois=mois;
-        this.annee=annee;
+        try {
+            if (jour<1||jour>31||mois<1||mois>12||annee<=21)
+                throw new IllegalArgumentException("La date n'existe pas ou est dans le passé.");
+            else {
+                this.jour=jour;
+                this.mois=mois;
+                this.annee=annee;
+            }
+        }
+        catch(IllegalArgumentException e) {
+            System.out.println("La date n'existe pas ou est dans le passé.");
+        }
     }
 
     public String toString(){

@@ -12,7 +12,15 @@ class Prix implements Validable,Generable{
     }
 
     Prix(float prix){
-        this.prix=prix;
+        try {
+            if (prix <=0)
+                throw new IllegalArgumentException("Un prix doit être strictement positif.");
+            else
+                this.prix=prix;
+        }
+        catch(IllegalArgumentException e) {
+            System.out.println("Un prix doit être strictement positif.");
+        }
     }
 
 }
