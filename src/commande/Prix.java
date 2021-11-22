@@ -1,7 +1,7 @@
 package commande;
 
-class Prix implements Validable{
-    int prix;
+class Prix implements Validable,Generable{
+    float prix;
 
     public int isValid(){
         if(this.prix<0){
@@ -11,7 +11,7 @@ class Prix implements Validable{
         }
     }
 
-    Prix(int prix){
+    Prix(float prix){
         this.prix=prix;
     }
 

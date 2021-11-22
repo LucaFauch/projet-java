@@ -1,6 +1,6 @@
 package commande;
 
-public class Date implements Validable{
+class Date implements Validable,Generable{
     int jour;
     int mois;
     int annee;
@@ -13,7 +13,7 @@ public class Date implements Validable{
         }
     }
 
-    private Date(int jour, int mois, int annee) throws InvalideDate{
+    Date(int jour, int mois, int annee) throws InvalideDate{
         this.jour=jour;
         this.mois=mois;
         this.annee=annee;

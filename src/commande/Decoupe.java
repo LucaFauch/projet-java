@@ -1,7 +1,7 @@
 package commande;
 
 
-import static commande.XmlRead.readXml;
+import static ui.XmlRead.readXml;
 
 class Decoupe {
 

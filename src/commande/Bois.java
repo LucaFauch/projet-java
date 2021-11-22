@@ -1,10 +1,12 @@
 package commande;
 
-class Bois {
+class Bois implements Generable{
     Dimensions dimensions;
+    int id;
 
-    Bois(Dimensions dimensions){
+    Bois(Dimensions dimensions,int id){
         this.dimensions=dimensions;
+        this.id=id;
     }
     
 }

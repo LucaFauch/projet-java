@@ -1,6 +1,6 @@
 package commande;
 
-class NbBois implements Validable{
+class NbBois implements Validable,Generable{
     int nombre;
 
     public int isValid(){
