@@ -14,12 +14,14 @@ import java.util.List;
 
 public class XmlRead
 {
-    public static void readXml(String filename,Factory f)
+    public static ArrayList<Generable> readXml(String filename,Factory f)
     {
+        ArrayList<Generable> list = new ArrayList<>();
         try
         {
             FileInputStream file = new FileInputStream(filename);
             XMLStreamReader reader = XMLInputFactory.newInstance().createXMLStreamReader(file);
+
             while(reader.hasNext())
             {
                 if(reader.next() == XMLStreamConstants.START_ELEMENT)
@@ -27,18 +29,18 @@ public class XmlRead
                     if(reader.getName().toString() == "client")
                     {
                         System.out.println("nouveau client");
-                        readClient(reader,f);
-                        return;
+                        list = readClient(reader,f);
+                        break;
                     }
                     if (reader.getName().toString() == "fournisseur"){
                         System.out.println("nouveau fournisseur");
-                        readFournisseur(reader,f);
-                        return;
+                         list = readFournisseur(reader,f);
+                        break;
                     }
                     if (reader.getName().toString() == "decoupe"){
                         System.out.println("Nouvelle découpe");
-                        readDecoupe(reader,f);
-                        return;
+                        //list = readDecoupe(reader,f);
+                        break;
                     }
                 }
             }
@@ -51,10 +53,12 @@ public class XmlRead
         {
             e.printStackTrace();
         }
+        return list;
     }
     static ArrayList<Generable> readClient(XMLStreamReader reader, Factory f) throws XMLStreamException
     {
         ArrayList<Generable> list = new ArrayList<>();
+        ArrayList<Generable> listPlanche = new ArrayList<>();
         int idClient = Integer.parseInt(reader.getAttributeValue(0));
         int L=0;
         int l=0;
@@ -71,7 +75,7 @@ public class XmlRead
             {
                 if(reader.getName().toString() == "client"){
                     System.out.println("nouveau client");
-                    list.add(f.initializeClient(idClient,list.get(1),list.get(5),list.get(2),list.get(0)));
+                    list.add(f.initializeClient(idClient,list.get(1),listPlanche,list.get(2),list.get(0)));
                     idClient = Integer.parseInt(reader.getAttributeValue(0));;
                 }
                 if(reader.getName().toString() == "planche")
@@ -104,7 +108,7 @@ public class XmlRead
                         L = Integer.parseInt(LDim[0]);
                         l = Integer.parseInt(lDim[0]);
                         list.add(f.initializeDimensions(L,l));
-                        list.add(f.initializePlanche(list.get(3),idPlanche));
+                        listPlanche.add(f.initializePlanche(list.get(3),idPlanche));
                         list.add(f.initializeBois(list.get(3),idPlanche));
                     }
                     catch (NumberFormatException e){
@@ -119,6 +123,7 @@ public class XmlRead
 
     static ArrayList<Generable> readFournisseur(XMLStreamReader reader, Factory f) throws XMLStreamException{
         ArrayList<Generable> list = new ArrayList<>();
+        ArrayList<Generable> listPanneau = new ArrayList<>();
         int idFournisseur = Integer.parseInt(reader.getAttributeValue(0));
         int L=0;
         int l=0;
@@ -135,7 +140,7 @@ public class XmlRead
             {
                 if(reader.getName().toString() == "fournisseur"){
                     System.out.println("nouveau fournisseur");
-                    list.add(f.initializeClient(idFournisseur,list.get(1),list.get(5),list.get(2),list.get(0)));
+                    list.add(f.initializeClient(idFournisseur,list.get(1),listPanneau,list.get(2),list.get(0)));
                     idFournisseur = Integer.parseInt(reader.getAttributeValue(0));;
                 }
                 if(reader.getName().toString() == "panneau")
@@ -168,7 +173,7 @@ public class XmlRead
                         L = Integer.parseInt(LDim[0]);
                         l = Integer.parseInt(lDim[0]);
                         list.add(f.initializeDimensions(L,l));
-                        list.add(f.initializePlanche(list.get(3),idPanneau));
+                        listPanneau.add(f.initializePlanche(list.get(3),idPanneau));
                         list.add(f.initializeBois(list.get(3),idPanneau));
                     }
                     catch (NumberFormatException e){
@@ -181,8 +186,8 @@ public class XmlRead
         return list;
     }
 
-    static ArrayList<Generable> readDecoupe(XMLStreamReader reader, Factory f) throws XMLStreamException{
-        ArrayList<Generable> list = new ArrayList<>();
+    static ArrayList<Integer> readDecoupe(XMLStreamReader reader, Factory f) throws XMLStreamException{
+        ArrayList<Integer> list = new ArrayList<>();
         int idFournisseur =0;
         int idClient =0;
         int x=0;
@@ -196,7 +201,12 @@ public class XmlRead
                 if(reader.getName().toString() == "fournisseur"){
                     try {
                         idFournisseur=Integer.parseInt(reader.getAttributeValue(0));
-                        idPanneau =Integer.parseInt(reader.getAttributeValue(1));
+                        list.add(idFournisseur);
+                        String StringIdPanneau = (reader.getAttributeValue(1));
+                        String[] idPannneaux = StringIdPanneau.split("\\.");
+                        int idPann = Integer.parseInt(idPannneaux[0]);
+                        int l = Integer.parseInt(idPannneaux[1]);
+                        list.add(idPann);
                     }
                     catch (NumberFormatException e){
                         System.out.println("Mauvais Type dans les arguments de fournisseur");
@@ -206,7 +216,12 @@ public class XmlRead
                 {
                     try {
                         idClient=Integer.parseInt(reader.getAttributeValue(0));
-                        idPlanche=Integer.parseInt(reader.getAttributeValue(1));
+                        list.add(idClient);
+                        String StringIdPanneau = (reader.getAttributeValue(1));
+                        String[] idPlanches = StringIdPanneau.split("\\.");
+                        int idPlan = Integer.parseInt(idPlanches[0]);
+                        int l = Integer.parseInt(idPlanches[1]);
+                        list.add(idPlan);
                     }
                     catch (NumberFormatException e){
                         System.out.println("Mauvais Type dans les arguments de client");
@@ -215,7 +230,9 @@ public class XmlRead
                 if (reader.getName().toString() == "position") {
                     try {
                         x=Math.round(Float.parseFloat(reader.getAttributeValue(0)));
+                        list.add(x);
                         y=Math.round(Float.parseFloat(reader.getAttributeValue(1)));
+                        list.add(y);
                     }
                     catch (NumberFormatException e){
                         System.out.println("Mauvais Type dans les arguments de position");
