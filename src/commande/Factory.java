@@ -1,5 +1,7 @@
 package commande;
 
+import java.util.ArrayList;
+
 public class Factory {
 
     public Date initializeDate(int jour, int mois, int annee){
@@ -26,13 +28,22 @@ public class Factory {
         return new Dimensions(longueur, largeur);
     }
 
-    public Fournisseur initializeFournisseur(int id, Generable prix, Generable bois, Generable nombreBois, Generable date){
-        return new Fournisseur(id,(Prix)prix,(Bois)bois,(NbBois)nombreBois,(Date)date);
+    public Fournisseur initializeFournisseur(int id, Generable prix, ArrayList<Generable> bois, Generable nombreBois, Generable date){
+        ArrayList<Bois> listBois=new ArrayList<>();
+        for (int i=0;i<bois.size();i++){
+            listBois.add((Bois)bois.get(i));
+        }
+        return new Fournisseur(id,(Prix)prix,listBois,(NbBois)nombreBois,(Date)date);
     }
 
-    public Client initializeClient(int id, Generable prix, Generable bois, Generable nombreBois, Generable date){
-        return new Client(id,(Prix)prix,(Bois)bois,(NbBois)nombreBois,(Date)date);
+    public Client initializeClient(int id, Generable prix, ArrayList<Generable> bois, Generable nombreBois, Generable date){
+        ArrayList<Bois> listBois=new ArrayList<>();
+        for (int i=0;i<bois.size();i++){
+            listBois.add((Bois)bois.get(i));
+        }
+        return new Client(id,(Prix)prix,listBois,(NbBois)nombreBois,(Date)date);
     }
+    //public Dcoupe initializeDcoupe(int )
     public Factory (){
 
     }

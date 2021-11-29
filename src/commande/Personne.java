@@ -1,11 +1,12 @@
 package commande;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 
 class Personne implements Validable{
     int id;
     Prix prix;
-    Bois bois;
+    ArrayList<Bois> bois;
     NbBois nombreBois;
     Date date;
 
@@ -17,7 +18,7 @@ class Personne implements Validable{
         }
     }
 
-    Personne(int id, Prix prix, Bois bois, NbBois nombreBois, Date date) throws InvalideId{
+    Personne(int id, Prix prix, ArrayList<Bois>  bois, NbBois nombreBois, Date date) throws InvalideId{
         this.id=id;
         this.prix=prix;
         this.bois=bois;
