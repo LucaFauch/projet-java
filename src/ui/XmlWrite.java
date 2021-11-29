@@ -1,6 +1,7 @@
 package ui;
 
 import java.io.FileOutputStream;
+import java.io.IOException;
 import java.util.ArrayList;
 
 import javax.xml.parsers.*;
@@ -22,37 +23,50 @@ public class XmlWrite {
         Element position = null;
 
         DocumentBuilderFactory docBuilderFactory = DocumentBuilderFactory.newInstance();
-        DocumentBuilder docBuilder = docBuilderFactory.newDocumentBuilder();
-        doc = docBuilder.newDocument();
+        try{
+            DocumentBuilder docBuilder = docBuilderFactory.newDocumentBuilder();
+        
+            doc = docBuilder.newDocument();
+            
+            Element firstElement = doc.createElement("decoupes");
 
-        Element firstElement = doc.createElement("decoupes");
+            for (Dcoupe d : l) {
+                decoupe=doc.createElement("decoupe");
 
-        for (Dcoupe d : l) {
-            decoupe=doc.createElement("decoupe");
+                client=doc.createElement("client");
+                // client.setAttribute("id", d.client.id.toString()); Récupérer les infos de découpe
+                decoupe.appendChild(client);
 
-            client=doc.createElement("client");
-            client.setAttribute("id", d.client.id.toString());
-            decoupe.appendChild(client);
+                fournisseur=doc.createElement("fournisseur");
+                // fournisseur.setAttribute("id", d.fournisseur.id.toString()); Récupérer les infos de découpe
+                decoupe.appendChild(fournisseur);
 
-            fournisseur=doc.createElement("fournisseur");
-            fournisseur.setAttribute("id", d.fournisseur.id.toString());
-            decoupe.appendChild(fournisseur);
+                position=doc.createElement("position");
+                // position.setAttribute("x", d.x.toString()); Récupérer les infos de découpe
+                // position.setAttribute("y", d.y.toString()); Récupérer les infos de découpe
+                decoupe.appendChild(position);
 
-            position=doc.createElement("position");
-            position.setAttribute("x", d.x.toString());
-            position.setAttribute("y", d.y.toString());
-            decoupe.appendChild(position);
+                firstElement.appendChild(decoupe);
+            }
 
-            firstElement.appendChild(decoupe);
+            doc.appendChild(firstElement);
+            try{
+                Transformer t = TransformerFactory.newInstance().newTransformer();
+                t.setOutputProperty(OutputKeys.INDENT, "yes");
+                t.setOutputProperty(OutputKeys.METHOD, "xml");
+                t.setOutputProperty(OutputKeys.ENCODING, "UTF-8");
+
+                t.transform(new DOMSource(doc), new StreamResult(new FileOutputStream(filename)));
+            }
+            catch(TransformerException e){
+                System.out.println(e.getMessage());
+            }
+            catch(IOException e){
+                System.out.println(e.getMessage());
+            }
         }
-
-        doc.appendChild(firstElement);
-
-        Transformer t = TransformerFactory.newInstance().newTransformer();
-        t.setOutputProperty(OutputKeys.INDENT, "yes");
-        t.setOutputProperty(OutputKeys.METHOD, "xml");
-        t.setOutputProperty(OutputKeys.ENCODING, "UTF-8");
-
-        t.transform(new DOMSource(doc), new StreamResult(new FileOutputStream(filename)));
+        catch(ParserConfigurationException e){
+            System.out.println("Error instantiating the DocumentBuilder "+e);
+        }
     }
 }
