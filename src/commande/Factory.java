@@ -43,7 +43,9 @@ public class Factory {
         }
         return new Client(id,(Prix)prix,listBois,(NbBois)nombreBois,(Date)date);
     }
-    //public Dcoupe initializeDcoupe(int )
+    public Dcoupe initializeDcoupe(int idFournisseur,int idPanneau,int idClient,int idPlanche,int x,int y){
+        return new Dcoupe(idFournisseur,idPanneau,idClient,idPlanche,x,y);
+    }
     public Factory (){
 
     }

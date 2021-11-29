@@ -16,8 +16,13 @@ class Decoupe {
         listClient = readXml(filename,f);
         listFournisseur = readXml(args[1],f);
         listDecoupe = readXml(args[2],f);
-        System.out.println(listFournisseur);
-
+        Client c;
+        for (int i=0;i<listClient.size();i++){
+            //c=(Client)listClient.get(i);
+            //System.out.println(c.id);
+            System.out.println(listClient.get(i));
+        }
+    //CHANGER LA LISTE CLIENT ET FOURNISSEUR DE XML READ
     }
 
 }
