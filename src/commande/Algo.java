@@ -13,7 +13,7 @@ class Algo{
 
     }
 
-    public optimise(List <Client> listC, List<Fournisseur> listF){
+    /*public optimise(List <Client> listC, List<Fournisseur> listF){
         for (Client value : listC) {
             //Ordonner selon la Longueur puis la largeur
             // https://www.codejava.net/java-core/collections/sorting-arrays-examples-with-comparable-and-comparator
@@ -35,6 +35,6 @@ class Algo{
 
 
         return listD;
-    }
+    }*/
 
 }

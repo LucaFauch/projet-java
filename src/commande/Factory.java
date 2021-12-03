@@ -16,6 +16,10 @@ public class Factory {
         return new Planche((Dimensions)dimensions,id);
     }
 
+    public Panneau initializePanneau(Generable dimensions,int id){
+        return new Panneau((Dimensions)dimensions,id);
+    }
+
     public Bois initializeBois(Generable dimensions,int id){
         return new Bois((Dimensions)dimensions,id);
     }
@@ -28,20 +32,32 @@ public class Factory {
         return new Dimensions(longueur, largeur);
     }
 
-    public Fournisseur initializeFournisseur(int id, Generable prix, ArrayList<Generable> bois, Generable nombreBois, Generable date){
+    public Fournisseur initializeFournisseur(int id, ArrayList<Generable> prix, ArrayList<Generable> bois, ArrayList<Generable> nombreBois, ArrayList<Generable> date){
         ArrayList<Bois> listBois=new ArrayList<>();
+        ArrayList<Prix> listPrix = new ArrayList<>();
+        ArrayList<NbBois> listNbBois = new ArrayList<>();
+        ArrayList<Date> listDate = new ArrayList<>();
         for (int i=0;i<bois.size();i++){
             listBois.add((Bois)bois.get(i));
+            listDate.add((Date)date.get(i));
+            listNbBois.add((NbBois) nombreBois.get(i));
+            listPrix.add((Prix) prix.get(i));
         }
-        return new Fournisseur(id,(Prix)prix,listBois,(NbBois)nombreBois,(Date)date);
+        return new Fournisseur(id,listPrix,listBois,listNbBois,listDate);
     }
 
-    public Client initializeClient(int id, Generable prix, ArrayList<Generable> bois, Generable nombreBois, Generable date){
+    public Client initializeClient(int id, ArrayList<Generable> prix, ArrayList<Generable> bois, ArrayList<Generable> nombreBois, ArrayList<Generable> date){
         ArrayList<Bois> listBois=new ArrayList<>();
+        ArrayList<Prix> listPrix = new ArrayList<>();
+        ArrayList<NbBois> listNbBois = new ArrayList<>();
+        ArrayList<Date> listDate = new ArrayList<>();
         for (int i=0;i<bois.size();i++){
             listBois.add((Bois)bois.get(i));
+            listDate.add((Date)date.get(i));
+            listNbBois.add((NbBois) nombreBois.get(i));
+            listPrix.add((Prix)prix.get(i));
         }
-        return new Client(id,(Prix)prix,listBois,(NbBois)nombreBois,(Date)date);
+        return new Client(id,listPrix,listBois,listNbBois,listDate);
     }
     public Dcoupe initializeDcoupe(int idFournisseur,int idPanneau,int idClient,int idPlanche,int x,int y){
         return new Dcoupe(idFournisseur,idPanneau,idClient,idPlanche,x,y);

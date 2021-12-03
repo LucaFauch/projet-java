@@ -57,8 +57,11 @@ public class XmlRead
     }
     static ArrayList<Generable> readClient(XMLStreamReader reader, Factory f) throws XMLStreamException
     {
-        ArrayList<Generable> list = new ArrayList<>();
+        ArrayList<Generable> listClient = new ArrayList<>();
         ArrayList<Generable> listPlanche = new ArrayList<>();
+        ArrayList<Generable> listPrix = new ArrayList<>();
+        ArrayList<Generable> listDate = new ArrayList<>();
+        ArrayList<Generable> listNbBois = new ArrayList<>();
         int idClient = Integer.parseInt(reader.getAttributeValue(0));
         int L=0;
         int l=0;
@@ -80,8 +83,12 @@ public class XmlRead
             {
                 if(reader.getName().toString() == "client"){
                     System.out.println("nouveau client");
-                    list.add(f.initializeClient(idClient,list.get(1),listPlanche,list.get(2),list.get(0)));
-                    idClient = Integer.parseInt(reader.getAttributeValue(0));;
+                    listClient.add(f.initializeClient(idClient,listPrix,listPlanche,listNbBois,listDate));
+                    listPlanche.clear();
+                    listDate.clear();
+                    listPrix.clear();
+                    listNbBois.clear();
+                    idClient = Integer.parseInt(reader.getAttributeValue(0));
                 }
                 if(reader.getName().toString() == "planche")
                 {
@@ -96,11 +103,17 @@ public class XmlRead
                         mois = Integer.parseInt(allDates[1]);
                         annee = Integer.parseInt(allDates[2]);
                         dateGen = f.initializeDate(jour, mois, annee);
+                        listDate.add(dateGen);
                         prix=Float.parseFloat(reader.getAttributeValue(3));
                         prixGen = f.initializePrix(prix);
+                        listPrix.add(prixGen);
                         nbBoisGen = f.initializeNbBois(nombre);
+                        listNbBois.add(nbBoisGen);
                     }
                     catch (NumberFormatException e){
+                        listNbBois.add(null);
+                        listPrix.add(null);
+                        listDate.add(null);
                         System.out.println("Mauvais Type dans les arguments de planche");
                         dateGen=null;
                         prixGen=null;
@@ -118,21 +131,28 @@ public class XmlRead
                         L = Integer.parseInt(LDim[0]);
                         l = Integer.parseInt(lDim[0]);
                         dimGen = f.initializeDimensions(L,l);
-                        listPlanche.add(f.initializePlanche(list.get(3),idPlanche));
-                        boisGen=f.initializeBois(list.get(3),idPlanche);
+                        listPlanche.add(f.initializePlanche(dimGen,idPlanche));
+                        //boisGen=f.initializeBois(dimGen,idPlanche);
+
                     }
                     catch (NumberFormatException e){
+                        listPlanche.add(null);
                         System.out.println("Mauvais Type dans les arguments de dim");
                     }
                 }
             }
         }
-        return list;
+        listClient.add(f.initializeClient(idClient,listPrix,listPlanche,listNbBois,listDate));
+        return listClient;
     }
 
-    static ArrayList<Generable> readFournisseur(XMLStreamReader reader, Factory f) throws XMLStreamException{
-        ArrayList<Generable> list = new ArrayList<>();
+    static ArrayList<Generable> readFournisseur(XMLStreamReader reader, Factory f) throws XMLStreamException
+    {
+        ArrayList<Generable> listFournisseur = new ArrayList<>();
         ArrayList<Generable> listPanneau = new ArrayList<>();
+        ArrayList<Generable> listPrix = new ArrayList<>();
+        ArrayList<Generable> listDate = new ArrayList<>();
+        ArrayList<Generable> listNbBois = new ArrayList<>();
         int idFournisseur = Integer.parseInt(reader.getAttributeValue(0));
         int L=0;
         int l=0;
@@ -142,15 +162,23 @@ public class XmlRead
         int mois=0;
         int annee=0;
         float prix=0;
-        int nbFournisseur=1;
+        Generable dateGen=null;
+        Generable prixGen=null;
+        Generable nbBoisGen=null;
+        Generable boisGen=null;
+        Generable dimGen=null;
         while(reader.hasNext())
         {
             if(reader.next() == XMLStreamConstants.START_ELEMENT)
             {
                 if(reader.getName().toString() == "fournisseur"){
                     System.out.println("nouveau fournisseur");
-                    list.add(f.initializeClient(idFournisseur,list.get(1),listPanneau,list.get(2),list.get(0)));
-                    idFournisseur = Integer.parseInt(reader.getAttributeValue(0));;
+                    listFournisseur.add(f.initializeFournisseur(idFournisseur,listPrix,listPanneau,listNbBois,listDate));
+                    listPanneau.clear();
+                    listDate.clear();
+                    listPrix.clear();
+                    listNbBois.clear();
+                    idFournisseur = Integer.parseInt(reader.getAttributeValue(0));
                 }
                 if(reader.getName().toString() == "panneau")
                 {
@@ -164,13 +192,24 @@ public class XmlRead
                         jour = Integer.parseInt(allDates[0]);
                         mois = Integer.parseInt(allDates[1]);
                         annee = Integer.parseInt(allDates[2]);
-                        list.add(f.initializeDate(jour, mois, annee));
+                        dateGen = f.initializeDate(jour, mois, annee);
+                        listDate.add(dateGen);
                         prix=Float.parseFloat(reader.getAttributeValue(3));
-                        list.add(f.initializePrix(prix));
-                        list.add(f.initializeNbBois(nombre));
+                        prixGen = f.initializePrix(prix);
+                        listPrix.add(prixGen);
+                        nbBoisGen = f.initializeNbBois(nombre);
+                        listNbBois.add(nbBoisGen);
                     }
                     catch (NumberFormatException e){
+                        listNbBois.add(null);
+                        listPrix.add(null);
+                        listDate.add(null);
                         System.out.println("Mauvais Type dans les arguments de panneau");
+                        dateGen=null;
+                        prixGen=null;
+                        nbBoisGen=null;
+                        boisGen=null;
+                        dimGen=null;
                     }
                 }
                 if (reader.getName().toString() == "dim") {
@@ -181,17 +220,19 @@ public class XmlRead
                         String[] lDim = lString.split("\\.");
                         L = Integer.parseInt(LDim[0]);
                         l = Integer.parseInt(lDim[0]);
-                        list.add(f.initializeDimensions(L,l));
-                        listPanneau.add(f.initializePlanche(list.get(3),idPanneau));
-                        list.add(f.initializeBois(list.get(3),idPanneau));
+                        dimGen = f.initializeDimensions(L,l);
+                        listPanneau.add(f.initializePanneau(dimGen,idPanneau));
+
                     }
                     catch (NumberFormatException e){
+                        listPanneau.add(null);
                         System.out.println("Mauvais Type dans les arguments de dim");
                     }
                 }
             }
         }
-        return list;
+        listFournisseur.add(f.initializeClient(idFournisseur,listPrix,listPanneau,listNbBois,listDate));
+        return listFournisseur;
     }
 
     static ArrayList<Generable> readDecoupe(XMLStreamReader reader, Factory f) throws XMLStreamException{

@@ -5,10 +5,10 @@ import java.util.Arrays;
 
 class Personne implements Validable{
     int id;
-    Prix prix;
+    ArrayList<Prix> prix;
     ArrayList<Bois> bois;
-    NbBois nombreBois;
-    Date date;
+    ArrayList<NbBois> nombreBois;
+    ArrayList<Date> date;
 
     public int isValid(){
         if(id<0){
@@ -18,7 +18,7 @@ class Personne implements Validable{
         }
     }
 
-    Personne(int id, Prix prix, ArrayList<Bois>  bois, NbBois nombreBois, Date date) throws InvalideId{
+    Personne(int id, ArrayList<Prix> prix, ArrayList<Bois>  bois, ArrayList<NbBois> nombreBois, ArrayList<Date> date) throws InvalideId{
         this.id=id;
         this.prix=prix;
         this.bois=bois;

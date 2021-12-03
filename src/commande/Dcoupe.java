@@ -2,7 +2,7 @@ package commande;
 
 import java.util.ArrayList;
 
-class Dcoupe implements Generable{
+public class Dcoupe implements Generable{
     private int idFournisseur;
     private int idPanneau;
     private int idClient;
