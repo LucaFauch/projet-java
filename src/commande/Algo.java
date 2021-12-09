@@ -10,6 +10,7 @@ class Algo{
     Algo(int type,ArrayList <Generable> listC, ArrayList<Generable> listF){
         if (type==1){
             this.listDcoupe=Etape2( listC, listF);
+
         }
     }
     ArrayList<Generable> remove_fournisseur_zeros (ArrayList<Generable> listFournisseur) {
@@ -51,6 +52,7 @@ class Algo{
      public ArrayList<Dcoupe> Etape2 (ArrayList <Generable> listC, ArrayList<Generable> listF){
         listC = remove_client_zeros(listC);
         listF = remove_fournisseur_zeros(listF);
+        System.out.println(((Client)listC.get(0)).bois.size());
         ArrayList<Dcoupe> listDcoupe = new ArrayList<>();
         for (int i = 0; i < listC.size(); i++){
             for (int l = 0;l<((Client)listC.get(i)).bois.size();l++) {
@@ -61,6 +63,9 @@ class Algo{
                             if (((Fournisseur)listF.get(j)).nombreBois.get(k).nombre >= ((Client)listC.get(i)).nombreBois.get(l).nombre){
                                 Dcoupe Decoupe2Do = new Dcoupe(((Fournisseur)listF.get(j)).id,((Fournisseur)listF.get(j)).bois.get(k).id,((Fournisseur)listF.get(j)).bois.get(k).dimensions.longueur,((Fournisseur)listF.get(j)).bois.get(k).dimensions.largeur,((Client)listC.get(i)).id,((Client)listC.get(i)).bois.get(l).id,((Client)listC.get(i)).bois.get(l).dimensions.longueur,((Client)listC.get(i)).bois.get(l).dimensions.largeur,0,0);
                                 listDcoupe.add(Decoupe2Do);
+                                System.out.println(((Fournisseur)listF.get(j)).nombreBois.get(k).nombre);
+                                ((Fournisseur)listF.get(j)).nombreBois.get(k).nombre = ((Fournisseur)listF.get(j)).nombreBois.get(k).nombre-1;
+                                System.out.println(((Fournisseur)listF.get(j)).nombreBois.get(k).nombre);
                             }
                         }
                     }

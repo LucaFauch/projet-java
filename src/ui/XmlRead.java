@@ -103,11 +103,9 @@ public class XmlRead
                         mois = Integer.parseInt(allDates[1]);
                         annee = Integer.parseInt(allDates[2]);
                         dateGen = f.initializeDate(jour, mois, annee);
-
                         prix=Float.parseFloat(reader.getAttributeValue(3));
                         prixGen = f.initializePrix(prix);
                         nbBoisGen = f.initializeNbBois(nombre);
-
                     }
                     catch (NumberFormatException e){
                         listNbBois.add(null);
@@ -123,7 +121,7 @@ public class XmlRead
                 }
                 if (reader.getName().toString() == "dim") {
                     try {
-                        if (dimGen != null && dateGen != null && prixGen != null && nbBoisGen != null && boisGen != null) {
+                        if (dateGen != null && prixGen != null && nbBoisGen != null ) {
                             listNbBois.add(nbBoisGen);
                             listDate.add(dateGen);
                             listPrix.add(prixGen);
@@ -207,7 +205,7 @@ public class XmlRead
                 }
                 if (reader.getName().toString() == "dim") {
                     try {
-                        if (dimGen != null && dateGen != null && prixGen != null && nbBoisGen != null && boisGen != null) {
+                        if (dateGen != null && prixGen != null && nbBoisGen != null) {
                             listDate.add(dateGen);
                             listPrix.add(prixGen);
                             listNbBois.add(nbBoisGen);

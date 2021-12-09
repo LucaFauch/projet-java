@@ -15,7 +15,7 @@ import commande.Dcoupe;
 import org.w3c.dom.*;
 
 public class XmlWrite {
-    public void writeXML(String filename, ArrayList<Dcoupe> l){
+    /*public void writeXML(String filename, ArrayList<Dcoupe> l){
         Document doc;
         Element decoupe = null;
         Element client = null;
@@ -116,5 +116,5 @@ public class XmlWrite {
         catch(ParserConfigurationException e){
             System.out.println("Error instantiating the DocumentBuilder "+e);
         }
-    }
+    }*/
 }
