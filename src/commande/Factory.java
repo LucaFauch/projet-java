@@ -43,7 +43,6 @@ public class Factory {
             listNbBois.add((NbBois) nombreBois.get(i));
             listPrix.add((Prix) prix.get(i));
         }
-        System.out.println("je crée un fournisseur");
         return new Fournisseur(id,listPrix,listBois,listNbBois,listDate);
     }
 

@@ -73,21 +73,57 @@ class Algo{
         listC = remove_client_zeros(listC);
         listF = remove_fournisseur_zeros(listF);
         ArrayList<Dcoupe> listDcoupe = new ArrayList<>();
-        for (int i = 0; i < listC.size(); i++){
-            for (int l = 0;l<((Client)listC.get(i)).bois.size();l++) {
-                outerloop:
-                for (int j = 0; j < listF.size(); j++) {
-                    for (int k = 0; k < ((Fournisseur)listF.get(j)).bois.size(); k++) {
-                        if (((Fournisseur)listF.get(j)).bois.get(k).dimensions.longueur >= ((Client)listC.get(i)).bois.get(l).dimensions.longueur && ((Fournisseur)listF.get(j)).bois.get(k).dimensions.largeur >= ((Client)listC.get(i)).bois.get(l).dimensions.largeur){
-                            if (((Fournisseur)listF.get(j)).nombreBois.get(k).nombre >= ((Client)listC.get(i)).nombreBois.get(l).nombre){
-                                Dcoupe Decoupe2Do = new Dcoupe(((Fournisseur)listF.get(j)).id,((Fournisseur)listF.get(j)).bois.get(k).id,((Fournisseur)listF.get(j)).bois.get(k).dimensions.longueur,((Fournisseur)listF.get(j)).bois.get(k).dimensions.largeur,((Client)listC.get(i)).id,((Client)listC.get(i)).bois.get(l).id,((Client)listC.get(i)).bois.get(l).dimensions.longueur,((Client)listC.get(i)).bois.get(l).dimensions.largeur,0,0);
-                                listDcoupe.add(Decoupe2Do);
+        ArrayList<Bois> b = ((Client)listC.get(0)).bois;
+        int breaker=0;
+        while (b.size() != 0)
+        {
+            if (breaker==20){
+                break;
+            }
+            Bois bois=b.get(0);
+            outerloop:
+            for (Generable g:listF){
+                Fournisseur f = (Fournisseur) g;
+                if (f.bois.size()==0){
+                    breaker++;
+                    break;
+                }
+                System.out.println("Taille de bois "+f.bois.size());
+                for (int k=0;k<f.bois.size();k++){
+                    Bois b1 = (Bois) f.bois.get(k);
+                    for (int i=0;i<((Client) listC.get(0)).nombreBois.get(0).nombre;i++) {
+                        if (b1.dimensions.longueur >= bois.dimensions.longueur && b1.dimensions.largeur >= bois.dimensions.largeur) {
+                            Dcoupe Decoupe2Do = new Dcoupe(f.id, b1.id, b1.dimensions.longueur, b1.dimensions.largeur, ((Client) listC.get(0)).id, bois.id, bois.dimensions.longueur, bois.dimensions.largeur, 0, 0);
+                            listDcoupe.add(Decoupe2Do);
+                            if (f.nombreBois.get(k).nombre > 1){
+                                f.nombreBois.get(k).nombre--;
+                            }
+                            else{
+                                f.nombreBois.remove(k);
+                                f.bois.remove(k);
+                                break outerloop;
+                            }
+                            if (b.size()>1){
+                                b.remove(0);
+                                bois=b.get(0);
+                                break outerloop;
+                            }
+                            if (b.size()==0){
+                                listC.remove((0));
+                                b = ((Client) listC.get(0)).bois;
                             }
                         }
                     }
+                    b.remove(0);
+                    ((Client) listC.get(0)).nombreBois.remove(0);
                 }
             }
         }
+         Dcoupe c=(Dcoupe) listDcoupe.get(0);
+         for (int j=0;j<listDcoupe.size();j++) {
+             System.out.println("Client id " +listDcoupe.get(j).idClient+ " longueur planche "+listDcoupe.get(j).heightPlanche+" largeur "+listDcoupe.get(j).widthPlanche);
+         }
+        System.out.println(listDcoupe.size());
         return listDcoupe;
     }
 

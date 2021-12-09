@@ -18,7 +18,7 @@ class Decoupe {
         listFournisseur = readXml(args[1],f);
         //listDecoupe = readXml(args[2],f);
 
-        Algo test = new Algo(2,listClient,listFournisseur);
+        Algo test = new Algo(1,listClient,listFournisseur);
         //CHANGER LA LISTE CLIENT ET FOURNISSEUR DE XML READ
     }
 
