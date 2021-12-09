@@ -83,9 +83,7 @@ public class XmlRead
             {
                 if(reader.getName().toString() == "client"){
                     System.out.println("nouveau client");
-                    if (dimGen != null && dateGen != null && prixGen != null && nbBoisGen != null && boisGen != null) {
-                        listClient.add(f.initializeClient(idClient, listPrix, listPlanche, listNbBois, listDate));
-                    }
+                    listClient.add(f.initializeClient(idClient, listPrix, listPlanche, listNbBois, listDate));
                     listPlanche.clear();
                     listDate.clear();
                     listPrix.clear();
@@ -105,12 +103,11 @@ public class XmlRead
                         mois = Integer.parseInt(allDates[1]);
                         annee = Integer.parseInt(allDates[2]);
                         dateGen = f.initializeDate(jour, mois, annee);
-                        listDate.add(dateGen);
+
                         prix=Float.parseFloat(reader.getAttributeValue(3));
                         prixGen = f.initializePrix(prix);
-                        listPrix.add(prixGen);
                         nbBoisGen = f.initializeNbBois(nombre);
-                        listNbBois.add(nbBoisGen);
+
                     }
                     catch (NumberFormatException e){
                         listNbBois.add(null);
@@ -126,16 +123,20 @@ public class XmlRead
                 }
                 if (reader.getName().toString() == "dim") {
                     try {
-                        String LString = (reader.getAttributeValue(0));
-                        String lString = (reader.getAttributeValue(1));
-                        String[] LDim = LString.split("\\.");
-                        String[] lDim = lString.split("\\.");
-                        L = Integer.parseInt(LDim[0]);
-                        l = Integer.parseInt(lDim[0]);
-                        dimGen = f.initializeDimensions(L,l);
-                        listPlanche.add(f.initializePlanche(dimGen,idPlanche));
-                        //boisGen=f.initializeBois(dimGen,idPlanche);
-
+                        if (dimGen != null && dateGen != null && prixGen != null && nbBoisGen != null && boisGen != null) {
+                            listNbBois.add(nbBoisGen);
+                            listDate.add(dateGen);
+                            listPrix.add(prixGen);
+                            String LString = (reader.getAttributeValue(0));
+                            String lString = (reader.getAttributeValue(1));
+                            String[] LDim = LString.split("\\.");
+                            String[] lDim = lString.split("\\.");
+                            L = Integer.parseInt(LDim[0]);
+                            l = Integer.parseInt(lDim[0]);
+                            dimGen = f.initializeDimensions(L, l);
+                            listPlanche.add(f.initializePlanche(dimGen, idPlanche));
+                            //boisGen=f.initializeBois(dimGen,idPlanche);
+                        }
                     }
                     catch (NumberFormatException e){
                         listPlanche.add(null);
@@ -144,9 +145,7 @@ public class XmlRead
                 }
             }
         }
-        if (dimGen != null && dateGen != null && prixGen != null && nbBoisGen != null && boisGen != null) {
-            listClient.add(f.initializeClient(idClient, listPrix, listPlanche, listNbBois, listDate));
-        }
+        listClient.add(f.initializeClient(idClient, listPrix, listPlanche, listNbBois, listDate));
         return listClient;
     }
 
@@ -174,9 +173,7 @@ public class XmlRead
             if (reader.next() == XMLStreamConstants.START_ELEMENT) {
                 if (reader.getName().toString() == "fournisseur") {
                     System.out.println("nouveau fournisseur");
-                    if (dimGen != null && dateGen != null && prixGen != null && nbBoisGen != null && boisGen != null) {
-                        listFournisseur.add(f.initializeFournisseur(idFournisseur, listPrix, listPanneau, listNbBois, listDate));
-                    }
+                    listFournisseur.add(f.initializeFournisseur(idFournisseur, listPrix, listPanneau, listNbBois, listDate));
                     listPanneau.clear();
                     listDate.clear();
                     listPrix.clear();
@@ -195,12 +192,10 @@ public class XmlRead
                         mois = Integer.parseInt(allDates[1]);
                         annee = Integer.parseInt(allDates[2]);
                         dateGen = f.initializeDate(jour, mois, annee);
-                        listDate.add(dateGen);
                         prix = Float.parseFloat(reader.getAttributeValue(3));
                         prixGen = f.initializePrix(prix);
-                        listPrix.add(prixGen);
                         nbBoisGen = f.initializeNbBois(nombre);
-                        listNbBois.add(nbBoisGen);
+
                     } catch (NumberFormatException e) {
                         System.out.println("Mauvais Type dans les arguments de panneau");
                         dateGen = null;
@@ -213,6 +208,9 @@ public class XmlRead
                 if (reader.getName().toString() == "dim") {
                     try {
                         if (dimGen != null && dateGen != null && prixGen != null && nbBoisGen != null && boisGen != null) {
+                            listDate.add(dateGen);
+                            listPrix.add(prixGen);
+                            listNbBois.add(nbBoisGen);
                             String LString = (reader.getAttributeValue(0));
                             String lString = (reader.getAttributeValue(1));
                             String[] LDim = LString.split("\\.");
