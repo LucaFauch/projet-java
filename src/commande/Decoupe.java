@@ -31,13 +31,14 @@ class Decoupe {
         ArrayList<Generable> listDecoupe = new ArrayList<>();
         listClient = readXml(filename,f);
         listFournisseur = readXml(args[1],f);
-        listDecoupe = readXml(args[2],f);
+        //listDecoupe = readXml(args[2],f);
 
+        Algo test = new Algo(1,listClient,listFournisseur);
         Client c=(Client)listClient.get(0);
         ArrayList<Bois> b=c.bois;
         //On retire toutes les valeurs en 0 dues à une mauvaise écriture dans le fichier clients.xml
         //PROBLEME UNE DES VALEURS NE DOIT PAS VALOIR 0 ET DONC N'EST PAS ENLEVEE
-        for (int i=0;i<listClient.size();i++) {
+        /*for (int i=0;i<listClient.size();i++) {
             b =(ArrayList<Bois>) ((Client)listClient.get(i)).bois;
             int k=0;
             while(k<b.size()){
@@ -76,7 +77,7 @@ class Decoupe {
 
         System.out.println("-----------------------------------------------");
         print_list(listClient);
-
+*/
     //CHANGER LA LISTE CLIENT ET FOURNISSEUR DE XML READ
     }
 

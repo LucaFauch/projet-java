@@ -43,6 +43,7 @@ public class Factory {
             listNbBois.add((NbBois) nombreBois.get(i));
             listPrix.add((Prix) prix.get(i));
         }
+        System.out.println("je crée un fournisseur");
         return new Fournisseur(id,listPrix,listBois,listNbBois,listDate);
     }
 
@@ -59,8 +60,8 @@ public class Factory {
         }
         return new Client(id,listPrix,listBois,listNbBois,listDate);
     }
-    public Dcoupe initializeDcoupe(int idFournisseur,int idPanneau,int idClient,int idPlanche,int x,int y){
-        return new Dcoupe(idFournisseur,idPanneau,idClient,idPlanche,x,y);
+    public DecoupeXml initializeDcoupe(int idFournisseur,int idPanneau,int idClient,int idPlanche,int x,int y){
+        return new DecoupeXml(idFournisseur,idPanneau,idClient,idPlanche,x,y);
     }
     public Factory (){
 
