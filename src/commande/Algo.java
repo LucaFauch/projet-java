@@ -52,22 +52,22 @@ class Algo{
         listC = remove_client_zeros(listC);
         listF = remove_fournisseur_zeros(listF);
         ArrayList<Dcoupe> listDcoupe = new ArrayList<>();
-         for (int i = 0; i < listC.size(); i++){
-             for (int l = 0;l<((Client)listC.get(i)).bois.size();l++) {
-                 outerloop:
-                 for (int j = 0; j < listF.size(); j++) {
-                     for (int k = 0; k < ((Fournisseur)listF.get(j)).bois.size(); k++) {
-                         if (((Fournisseur)listF.get(j)).bois.get(k).dimensions.longueur >= ((Client)listC.get(i)).bois.get(l).dimensions.longueur && ((Fournisseur)listF.get(j)).bois.get(k).dimensions.largeur >= ((Client)listC.get(i)).bois.get(l).dimensions.largeur){
-                             if (((Fournisseur)listF.get(j)).nombreBois.get(k).nombre >= ((Client)listC.get(i)).nombreBois.get(l).nombre){
-                                 Dcoupe Decoupe2Do = new Dcoupe(((Fournisseur)listF.get(j)).id,((Fournisseur)listF.get(j)).bois.get(k).id,((Fournisseur)listF.get(j)).bois.get(k).dimensions.longueur,((Fournisseur)listF.get(j)).bois.get(k).dimensions.largeur,((Client)listC.get(i)).id,((Client)listC.get(i)).bois.get(l).id,((Client)listC.get(i)).bois.get(l).dimensions.longueur,((Client)listC.get(i)).bois.get(l).dimensions.largeur,0,0);
-                                 listDcoupe.add(Decoupe2Do);
-                             }
-                         }
-                     }
-                 }
-             }
-         }
-         return listDcoupe;
+        for (int i = 0; i < listC.size(); i++){
+            for (int l = 0;l<((Client)listC.get(i)).bois.size();l++) {
+                outerloop:
+                for (int j = 0; j < listF.size(); j++) {
+                    for (int k = 0; k < ((Fournisseur)listF.get(j)).bois.size(); k++) {
+                        if (((Fournisseur)listF.get(j)).bois.get(k).dimensions.longueur >= ((Client)listC.get(i)).bois.get(l).dimensions.longueur && ((Fournisseur)listF.get(j)).bois.get(k).dimensions.largeur >= ((Client)listC.get(i)).bois.get(l).dimensions.largeur){
+                            if (((Fournisseur)listF.get(j)).nombreBois.get(k).nombre >= ((Client)listC.get(i)).nombreBois.get(l).nombre){
+                                Dcoupe Decoupe2Do = new Dcoupe(((Fournisseur)listF.get(j)).id,((Fournisseur)listF.get(j)).bois.get(k).id,((Fournisseur)listF.get(j)).bois.get(k).dimensions.longueur,((Fournisseur)listF.get(j)).bois.get(k).dimensions.largeur,((Client)listC.get(i)).id,((Client)listC.get(i)).bois.get(l).id,((Client)listC.get(i)).bois.get(l).dimensions.longueur,((Client)listC.get(i)).bois.get(l).dimensions.largeur,0,0);
+                                listDcoupe.add(Decoupe2Do);
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        return listDcoupe;
     }
     /*public optimise(List <Client> listC, List<Fournisseur> listF){
         for (Client value : listC) {

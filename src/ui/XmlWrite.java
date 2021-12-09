@@ -35,10 +35,12 @@ public class XmlWrite {
 
                 client=doc.createElement("client");
                 // client.setAttribute("id", String.valueOf(d.idClient)); // Récupérer les infos de découpe
+                // client.setAttribute("planche", String.valueOf(d.idPlanche));
                 decoupe.appendChild(client);
 
                 fournisseur=doc.createElement("fournisseur");
                 // fournisseur.setAttribute("id", String.valueOf(d.idFournisseur)); // Récupérer les infos de découpe
+                // client.setAttribute("panneau", String.valueOf(d.idPanneau));
                 decoupe.appendChild(fournisseur);
 
                 position=doc.createElement("position");
@@ -82,7 +84,7 @@ public class XmlWrite {
             
             Element firstElement = doc.createElement("svg");
             firstElement.setAttribute("version", "1.1");
-            firstElement.setAttribute("width", "1.1");
+            firstElement.setAttribute("width", String.valueOf());
             firstElement.setAttribute("height", "1.1");
 
             for (Dcoupe d : l) {
@@ -99,7 +101,7 @@ public class XmlWrite {
             try{
                 Transformer t = TransformerFactory.newInstance().newTransformer();
                 t.setOutputProperty(OutputKeys.INDENT, "yes");
-                t.setOutputProperty(OutputKeys.METHOD, "svg");
+                t.setOutputProperty(OutputKeys.METHOD, "html");
                 t.setOutputProperty(OutputKeys.ENCODING, "UTF-8");
 
                 t.transform(new DOMSource(doc), new StreamResult(new FileOutputStream(filename)));
