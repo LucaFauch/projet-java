@@ -16,7 +16,7 @@ import org.w3c.dom.*;
 
 public class XmlWrite {
     /*public void writeXML(String filename, ArrayList<Dcoupe> l){
-        Document doc;
+        /*Document doc;
         Element decoupe = null;
         Element client = null;
         Element fournisseur = null;

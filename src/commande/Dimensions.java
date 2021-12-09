@@ -15,14 +15,14 @@ public class Dimensions implements Validable,Generable{
     Dimensions(int longueur, int largeur) {
         try {
             if (longueur < 0 || largeur < 0 || longueur < largeur)
-                throw new IllegalArgumentException("Les longueurs et largeurs doivent être strictement positive et la longueur doit etre plus grande que la largeur.");
+                throw new IllegalArgumentException("Les longueurs et largeurs doivent être strictement positives et la longueur doit etre plus grande que la largeur.");
             else {
                 this.longueur = longueur;
                 this.largeur = largeur;
             }
         }
         catch(IllegalArgumentException e) {
-            System.out.println("Les longueurs et largeurs doivent être strictement positive et la longueur doit etre plus grande que la largeur.");
+            System.out.println("Les longueurs et largeurs doivent être strictement positives et la longueur doit etre plus grande que la largeur.");
         }
 
     }
