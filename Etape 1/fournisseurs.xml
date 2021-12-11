@@ -1,6 +1,6 @@
 <fournisseurs>
     <fournisseur id="0">
-        <panneau id="0" nombre="10" date="01.02.22" prix="200.00">
+        <panneau id="0" nombre="5" date="01.02.22" prix="200.00">
             <dim L="200.00" l="100.00" />
         </panneau>
         <panneau id="1" nombre="10" date="01.02.22" prix="-150.00">
