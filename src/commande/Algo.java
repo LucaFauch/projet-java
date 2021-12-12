@@ -226,6 +226,7 @@ class Algo{
             System.out.println("planche id " +listDcoupe.get(j).idPlanche+ " longueur planche "+listDcoupe.get(j).heightPlanche+" largeur "+listDcoupe.get(j).widthPlanche + " id panneau "+listDcoupe.get(j).idPanneau+" longueur panneau "+listDcoupe.get(j).heightPanneau+" largeur panneau "+listDcoupe.get(j).widthPanneau);
         }
         System.out.println(listDcoupe.size());
+        this.listDcoupe=listDcoupe;
         return listDcoupe;
     }
 
@@ -301,6 +302,7 @@ class Algo{
             System.out.println("planche id " +listDcoupe.get(j).idPlanche+ " longueur planche "+listDcoupe.get(j).heightPlanche+" largeur "+listDcoupe.get(j).widthPlanche + " id panneau "+listDcoupe.get(j).idPanneau+" longueur panneau "+listDcoupe.get(j).heightPanneau+" largeur panneau "+listDcoupe.get(j).widthPanneau+ "     x="+listDcoupe.get(j).x+"  y="+listDcoupe.get(j).y);
         }
         System.out.println(listDcoupe.size());
+        this.listDcoupe=listDcoupe;
         return listDcoupe;
     }
 
