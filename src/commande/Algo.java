@@ -181,7 +181,6 @@ class Algo{
         listF = remove_fournisseur_zeros(listF);
         ArrayList<Dcoupe> listDcoupe = new ArrayList<>();
         ArrayList<Bois> b = ((Client)listC.get(0)).bois;
-        Bois bois;
         int ind;
         int k=0;
         int stop_boucle=0;
@@ -212,6 +211,20 @@ class Algo{
                       }
                   }
                 }
+                else {
+                    ind++;
+                }
+                if (ind == ((Fournisseur) listF.get(k)).bois.size()){
+                    ind=0;
+                    k++;
+                }
+                if (k == listF.size()){
+                    System.out.println(" il n'y a pas de panneau possible pour cette planche");
+                    ((Client)listC.get(0)).nombreBois.remove(0);
+                    ((Client)listC.get(0)).bois.remove(0);
+                    k=0;
+                }
+
             }
             if (((Client) listC.get(0)).nombreBois.size()==0){
                 listC.remove(0);
