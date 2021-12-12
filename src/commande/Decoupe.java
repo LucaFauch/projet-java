@@ -3,6 +3,8 @@ package commande;
 
 import java.util.ArrayList;
 
+import ui.XmlWrite;
+
 import static ui.XmlRead.readXml;
 
 class Decoupe {
@@ -20,6 +22,9 @@ class Decoupe {
 
         Algo test = new Algo(3,listClient,listFournisseur,listDecoupe);
         //CHANGER LA LISTE CLIENT ET FOURNISSEUR DE XML READ
+
+        XmlWrite.writeXML(test.listDcoupe);
+        XmlWrite.writeSVG(test.listDcoupe);
     }
 
 }

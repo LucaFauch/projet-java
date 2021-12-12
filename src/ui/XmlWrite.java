@@ -3,6 +3,7 @@ package ui;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Random;
 
 import javax.xml.parsers.*;
 import javax.xml.transform.*;
@@ -15,8 +16,8 @@ import commande.Dcoupe;
 import org.w3c.dom.*;
 
 public class XmlWrite {
-    /*public void writeXML(String filename, ArrayList<Dcoupe> l){
-        /*Document doc;
+    public static void writeXML(ArrayList<Dcoupe> l){
+        Document doc;
         Element decoupe = null;
         Element client = null;
         Element fournisseur = null;
@@ -30,25 +31,43 @@ public class XmlWrite {
             
             Element firstElement = doc.createElement("decoupes");
 
+            int clientCourant=l.get(0).idClient;
+            int fournisseurCourant=l.get(0).idFournisseur;
+            int compteurPlanche=0;
+            int compteurPanneau=0;
+
             for (Dcoupe d : l) {
+                if(d.idClient==clientCourant){
+                    compteurPanneau++;
+                }else{
+                    compteurPanneau=1;
+                }
+                if(d.idFournisseur==fournisseurCourant){
+                    compteurPlanche++;
+                }else{
+                    compteurPlanche=1;
+                }
                 decoupe=doc.createElement("decoupe");
 
                 client=doc.createElement("client");
-                // client.setAttribute("id", String.valueOf(d.idClient)); // Récupérer les infos de découpe
-                // client.setAttribute("planche", String.valueOf(d.idPlanche));
+                client.setAttribute("id", String.valueOf(d.idClient)); // Récupérer les infos de découpe
+                client.setAttribute("planche", String.valueOf(d.idPlanche)+"."+String.valueOf(compteurPlanche));
                 decoupe.appendChild(client);
 
                 fournisseur=doc.createElement("fournisseur");
-                // fournisseur.setAttribute("id", String.valueOf(d.idFournisseur)); // Récupérer les infos de découpe
-                // client.setAttribute("panneau", String.valueOf(d.idPanneau));
+                fournisseur.setAttribute("id", String.valueOf(d.idFournisseur)); // Récupérer les infos de découpe
+                fournisseur.setAttribute("panneau", String.valueOf(d.idPanneau)+"."+String.valueOf(compteurPanneau));
                 decoupe.appendChild(fournisseur);
 
                 position=doc.createElement("position");
-                // position.setAttribute("x", String.valueOf(d.x)); Récupérer les infos de découpe
-                // position.setAttribute("y", String.valueOf(d.y)); Récupérer les infos de découpe
+                position.setAttribute("x", String.valueOf(d.x)); //Récupérer les infos de découpe
+                position.setAttribute("y", String.valueOf(d.y)); //Récupérer les infos de découpe
                 decoupe.appendChild(position);
 
                 firstElement.appendChild(decoupe);
+
+                clientCourant=d.idClient;
+                fournisseurCourant=d.idFournisseur;
             }
 
             doc.appendChild(firstElement);
@@ -58,7 +77,7 @@ public class XmlWrite {
                 t.setOutputProperty(OutputKeys.METHOD, "xml");
                 t.setOutputProperty(OutputKeys.ENCODING, "UTF-8");
 
-                t.transform(new DOMSource(doc), new StreamResult(new FileOutputStream(filename)));
+                t.transform(new DOMSource(doc), new StreamResult(new FileOutputStream("decoupes.xml")));
             }
             catch(TransformerException e){
                 System.out.println(e.getMessage());
@@ -72,49 +91,92 @@ public class XmlWrite {
         }
     }
 
-    public void writeSVG(String filename, ArrayList<Dcoupe> l){
-        Document doc;
+    public static void writeSVG(ArrayList<Dcoupe> l){
+        Document doc = null;
         Element rectangle = null;
-
-        DocumentBuilderFactory docBuilderFactory = DocumentBuilderFactory.newInstance();
-        try{
-            DocumentBuilder docBuilder = docBuilderFactory.newDocumentBuilder();
+        Element firstElement = null;
         
+        DocumentBuilder docBuilder;
+        DocumentBuilderFactory docBuilderFactory = DocumentBuilderFactory.newInstance();
+
+        try{
+            docBuilder = docBuilderFactory.newDocumentBuilder();
+                
             doc = docBuilder.newDocument();
             
-            Element firstElement = doc.createElement("svg");
+            firstElement = doc.createElement("svg");
             firstElement.setAttribute("version", "1.1");
-            firstElement.setAttribute("width", String.valueOf());
-            firstElement.setAttribute("height", "1.1");
-
-            for (Dcoupe d : l) {
-                rectangle=doc.createElement("rectangle");
-                rectangle.setAttribute("x", String.valueOf(d.x));
-                rectangle.setAttribute("x", String.valueOf(d.y));
-                // rectangle.setAttributes("width", String.valueOf(d.width));
-                // rectangle.setAttributes("height", String.valueOf(d.height));
-
-                firstElement.appendChild(rectangle);
-            }
+            firstElement.setAttribute("width", String.valueOf(l.get(0).widthPanneau));
+            firstElement.setAttribute("height", String.valueOf(l.get(0).heightPanneau));
 
             doc.appendChild(firstElement);
-            try{
-                Transformer t = TransformerFactory.newInstance().newTransformer();
-                t.setOutputProperty(OutputKeys.INDENT, "yes");
-                t.setOutputProperty(OutputKeys.METHOD, "html");
-                t.setOutputProperty(OutputKeys.ENCODING, "UTF-8");
-
-                t.transform(new DOMSource(doc), new StreamResult(new FileOutputStream(filename)));
-            }
-            catch(TransformerException e){
-                System.out.println(e.getMessage());
-            }
-            catch(IOException e){
-                System.out.println(e.getMessage());
-            }
-        }
-        catch(ParserConfigurationException e){
+        }catch(ParserConfigurationException e){
             System.out.println("Error instantiating the DocumentBuilder "+e);
+        }    
+
+        int panneauCourant=l.get(0).idPanneau;
+
+        for(Dcoupe d : l){
+            try{
+                if(d.idPanneau!=panneauCourant){
+                    try{
+                        Transformer t = TransformerFactory.newInstance().newTransformer();
+                        t.setOutputProperty(OutputKeys.INDENT, "yes");
+                        t.setOutputProperty(OutputKeys.METHOD, "html");
+                        t.setOutputProperty(OutputKeys.ENCODING, "UTF-8");
+        
+                        t.transform(new DOMSource(doc), new StreamResult(new FileOutputStream("panneau"+String.valueOf(panneauCourant)+".svg")));
+                    }
+                    catch(TransformerException e){
+                        System.out.println(e.getMessage());
+                    }
+                    catch(IOException e){
+                        System.out.println(e.getMessage());
+                    }
+
+                    docBuilder = docBuilderFactory.newDocumentBuilder();
+                
+                    doc = docBuilder.newDocument();
+                    
+                    firstElement = doc.createElement("svg");
+                    firstElement.setAttribute("version", "1.1");
+                    firstElement.setAttribute("width", String.valueOf(d.widthPanneau));
+                    firstElement.setAttribute("height", String.valueOf(d.heightPanneau));
+        
+                    doc.appendChild(firstElement);
+                }
+
+                rectangle=doc.createElement("rect");
+                rectangle.setAttribute("x", String.valueOf(d.x));
+                rectangle.setAttribute("y", String.valueOf(d.y));
+                rectangle.setAttribute("width", String.valueOf(d.widthPlanche));
+                rectangle.setAttribute("height", String.valueOf(d.heightPlanche));
+                Random rand = new Random();
+                String r=String.valueOf(rand.nextInt(256));
+                String g=String.valueOf(rand.nextInt(256));
+                String b=String.valueOf(rand.nextInt(256));
+                rectangle.setAttribute("fill", "rgb("+r+","+g+","+b+")");
+                firstElement.appendChild(rectangle);
+
+                panneauCourant=d.idPanneau;
+            }
+            catch(ParserConfigurationException e){
+                System.out.println("Error instantiating the DocumentBuilder "+e);
+            }            
         }
-    }*/
+        try{
+            Transformer t = TransformerFactory.newInstance().newTransformer();
+            t.setOutputProperty(OutputKeys.INDENT, "yes");
+            t.setOutputProperty(OutputKeys.METHOD, "html");
+            t.setOutputProperty(OutputKeys.ENCODING, "UTF-8");
+
+            t.transform(new DOMSource(doc), new StreamResult(new FileOutputStream("panneau"+String.valueOf(panneauCourant)+".svg")));
+        }
+        catch(TransformerException e){
+            System.out.println(e.getMessage());
+        }
+        catch(IOException e){
+            System.out.println(e.getMessage());
+        }
+    }
 }
