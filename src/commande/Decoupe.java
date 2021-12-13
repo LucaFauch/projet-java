@@ -23,8 +23,8 @@ class Decoupe {
         Algo test = new Algo(2,listClient,listFournisseur,listDecoupe);
         //CHANGER LA LISTE CLIENT ET FOURNISSEUR DE XML READ
 
-        XmlWrite.writeXML(test.listDcoupe);
-        XmlWrite.writeSVG(test.listDcoupe);
+        XmlWrite.writeXML(args[3],test.listDcoupe);
+        XmlWrite.writeSVG(args[3],test.listDcoupe);
     }
 
 }

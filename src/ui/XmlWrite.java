@@ -16,7 +16,7 @@ import commande.Dcoupe;
 import org.w3c.dom.*;
 
 public class XmlWrite {
-    public static void writeXML(ArrayList<Dcoupe> l){
+    public static void writeXML(String dossier, ArrayList<Dcoupe> l){
         Document doc;
         Element decoupe = null;
         Element client = null;
@@ -74,10 +74,10 @@ public class XmlWrite {
             try{
                 Transformer t = TransformerFactory.newInstance().newTransformer();
                 t.setOutputProperty(OutputKeys.INDENT, "yes");
-                t.setOutputProperty(OutputKeys.METHOD, "xml");
+                t.setOutputProperty(OutputKeys.METHOD, "html");
                 t.setOutputProperty(OutputKeys.ENCODING, "UTF-8");
 
-                t.transform(new DOMSource(doc), new StreamResult(new FileOutputStream("decoupes.xml")));
+                t.transform(new DOMSource(doc), new StreamResult(new FileOutputStream(dossier+"/decoupes.xml")));
             }
             catch(TransformerException e){
                 System.out.println(e.getMessage());
@@ -91,7 +91,7 @@ public class XmlWrite {
         }
     }
 
-    public static void writeSVG(ArrayList<Dcoupe> l){
+    public static void writeSVG(String dossier, ArrayList<Dcoupe> l){
         Document doc = null;
         Element rectangle = null;
         Element firstElement = null;
@@ -106,8 +106,8 @@ public class XmlWrite {
             
             firstElement = doc.createElement("svg");
             firstElement.setAttribute("version", "1.1");
-            firstElement.setAttribute("width", String.valueOf(l.get(0).widthPanneau));
-            firstElement.setAttribute("height", String.valueOf(l.get(0).heightPanneau));
+            firstElement.setAttribute("width", String.valueOf(l.get(0).widthPanneau*10));
+            firstElement.setAttribute("height", String.valueOf(l.get(0).heightPanneau*10));
 
             doc.appendChild(firstElement);
         }catch(ParserConfigurationException e){
@@ -125,7 +125,7 @@ public class XmlWrite {
                         t.setOutputProperty(OutputKeys.METHOD, "html");
                         t.setOutputProperty(OutputKeys.ENCODING, "UTF-8");
         
-                        t.transform(new DOMSource(doc), new StreamResult(new FileOutputStream("panneau"+String.valueOf(panneauCourant)+".svg")));
+                        t.transform(new DOMSource(doc), new StreamResult(new FileOutputStream(dossier+"/panneau"+String.valueOf(panneauCourant)+".svg")));
                     }
                     catch(TransformerException e){
                         System.out.println(e.getMessage());
@@ -140,17 +140,17 @@ public class XmlWrite {
                     
                     firstElement = doc.createElement("svg");
                     firstElement.setAttribute("version", "1.1");
-                    firstElement.setAttribute("width", String.valueOf(d.widthPanneau));
-                    firstElement.setAttribute("height", String.valueOf(d.heightPanneau));
+                    firstElement.setAttribute("width", String.valueOf(d.widthPanneau*10));
+                    firstElement.setAttribute("height", String.valueOf(d.heightPanneau*10));
         
                     doc.appendChild(firstElement);
                 }
 
                 rectangle=doc.createElement("rect");
-                rectangle.setAttribute("x", String.valueOf(d.x));
-                rectangle.setAttribute("y", String.valueOf(d.y));
-                rectangle.setAttribute("width", String.valueOf(d.widthPlanche));
-                rectangle.setAttribute("height", String.valueOf(d.heightPlanche));
+                rectangle.setAttribute("x", String.valueOf(d.x*10));
+                rectangle.setAttribute("y", String.valueOf(d.y*10));
+                rectangle.setAttribute("width", String.valueOf(d.widthPlanche*10));
+                rectangle.setAttribute("height", String.valueOf(d.heightPlanche*10));
                 Random rand = new Random();
                 String r=String.valueOf(rand.nextInt(256));
                 String g=String.valueOf(rand.nextInt(256));
@@ -170,7 +170,7 @@ public class XmlWrite {
             t.setOutputProperty(OutputKeys.METHOD, "html");
             t.setOutputProperty(OutputKeys.ENCODING, "UTF-8");
 
-            t.transform(new DOMSource(doc), new StreamResult(new FileOutputStream("panneau"+String.valueOf(panneauCourant)+".svg")));
+            t.transform(new DOMSource(doc), new StreamResult(new FileOutputStream(dossier+"/panneau"+String.valueOf(panneauCourant)+".svg")));
         }
         catch(TransformerException e){
             System.out.println(e.getMessage());
