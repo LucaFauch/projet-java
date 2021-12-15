@@ -131,6 +131,29 @@ class Algo{
         return listClient;
     }
 
+    ArrayList<Generable> order_list_client(ArrayList<Generable> listClient){
+        ArrayList<Bois> b;
+        for (int i=0;i<listClient.size();i++){
+            b =(ArrayList<Bois>) ((Client)listClient.get(i)).bois;
+            for (int k=0;k<b.size();k++) {
+                int cle=b.get(k).dimensions.longueur;
+                int cle2=b.get(k).dimensions.largeur;
+                Bois key=b.get(k);
+                int j=k;
+                while(j>0 && ((b.get(j-1).dimensions.longueur>cle) || ( b.get(j-1).dimensions.longueur==cle && b.get(j-1).dimensions.largeur>cle2))){
+                    System.out.println(b.get(j-1).dimensions.longueur);
+                    b.set(j,b.get(j-1));
+                    j=j-1;
+                    print_list(listClient);
+                }
+                b.set(j,key);
+                print_list(listClient);
+            }
+            ((Client) listClient.get(i)).bois=b;
+        }
+    }
+
+
     void Etape1 (ArrayList<Generable> listC, ArrayList<Generable>listF,ArrayList<Generable>listD){
         listC = remove_client_zeros(listC);
         listF = remove_fournisseur_zeros(listF);
