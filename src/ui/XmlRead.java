@@ -28,17 +28,17 @@ public class XmlRead
                 {
                     if(reader.getName().toString() == "client")
                     {
-                        System.out.println("nouveau client");
+                        System.out.println("------------------ LECTURE D'UN FICHIER client.xml---------------------");
                         list = readClient(reader,f);
                         break;
                     }
                     if (reader.getName().toString() == "fournisseur"){
-                        System.out.println("nouveau fournisseur");
+                        System.out.println("------------------ LECTURE D'UN FICHIER fournisseur.xml---------------------");
                         list = readFournisseur(reader,f);
                         break;
                     }
                     if (reader.getName().toString() == "decoupe"){
-                        System.out.println("Nouvelle découpe");
+                        System.out.println("------------------ LECTURE D'UN FICHIER decoupe.xml---------------------");
                         list = readDecoupe(reader,f);
                         break;
                     }
@@ -82,7 +82,6 @@ public class XmlRead
             if(reader.next() == XMLStreamConstants.START_ELEMENT)
             {
                 if(reader.getName().toString() == "client"){
-                    System.out.println("nouveau client");
                     listClient.add(f.initializeClient(idClient, listPrix, listPlanche, listNbBois, listDate));
                     listPlanche.clear();
                     listDate.clear();
@@ -94,7 +93,6 @@ public class XmlRead
                 {
                     try {
                         nombre++;
-                        System.out.println("nouvelle planche");
                         idPlanche = Integer.parseInt(reader.getAttributeValue(0));
                         nombre = Integer.parseInt(reader.getAttributeValue(1));
                         String dates = (reader.getAttributeValue(2));
@@ -170,7 +168,6 @@ public class XmlRead
         while (reader.hasNext()) {
             if (reader.next() == XMLStreamConstants.START_ELEMENT) {
                 if (reader.getName().toString() == "fournisseur") {
-                    System.out.println("nouveau fournisseur");
                     listFournisseur.add(f.initializeFournisseur(idFournisseur, listPrix, listPanneau, listNbBois, listDate));
                     listPanneau.clear();
                     listDate.clear();
@@ -181,7 +178,6 @@ public class XmlRead
                 if (reader.getName().toString() == "panneau") {
                     try {
                         nombre++;
-                        System.out.println("nouveau panneau");
                         idPanneau = Integer.parseInt(reader.getAttributeValue(0));
                         nombre = Integer.parseInt(reader.getAttributeValue(1));
                         String dates = (reader.getAttributeValue(2));
