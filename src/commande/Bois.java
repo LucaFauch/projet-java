@@ -14,7 +14,7 @@ class Bois implements Generable{
      * @param id : l'identifiant du bois
      * */
 
-    protected Bois(Dimensions dimensions,int id){
+    Bois(Dimensions dimensions,int id){
         this.dimensions=dimensions;
         this.id=id;
     }

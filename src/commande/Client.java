@@ -16,7 +16,7 @@ class Client extends Personne implements Generable{
      * @param nombreBois : liste des objets de classe NbBois correspondant aux nombres de bois identiques du Client
      * @param date : liste des objets de classe Date
      * */
-    protected Client(int id, ArrayList<Prix> prix, ArrayList<Bois> bois, ArrayList<NbBois> nombreBois, ArrayList<Date> date){
+    Client(int id, ArrayList<Prix> prix, ArrayList<Bois> bois, ArrayList<NbBois> nombreBois, ArrayList<Date> date){
         super(id,prix,bois,nombreBois,date);
     }
 }

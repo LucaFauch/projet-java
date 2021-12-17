@@ -4,7 +4,7 @@ package commande;
  * @see Bois
  * */
 
-public class Dimensions implements Validable,Generable{
+class Dimensions implements Validable,Generable{
     int longueur;
     int largeur;
 
