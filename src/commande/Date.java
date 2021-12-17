@@ -27,7 +27,6 @@ class Date implements Validable,Generable{
             System.out.println("La date n'existe pas ou est dans le passé.");
         }
     }
-
     public String toString(){
         return this.jour+"."+this.mois+"."+this.annee;
     }
