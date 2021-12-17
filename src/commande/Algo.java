@@ -179,20 +179,30 @@ class Algo{
 
     ArrayList<Generable> order_list_client(ArrayList<Generable> listClient){
         ArrayList<Bois> b;
+        ArrayList<Prix> p;
+        ArrayList<NbBois> nb;
         for (int i=0;i<listClient.size();i++){
             b =(ArrayList<Bois>) ((Client)listClient.get(i)).bois;
+            p =((Client)listClient.get(i)).prix;
+            nb =((Client)listClient.get(i)).nombreBois;
             for (int k=0;k<b.size();k++) {
                 int cle=b.get(k).dimensions.longueur;
                 int cle2=b.get(k).dimensions.largeur;
                 Bois key=b.get(k);
+                Prix pkey=p.get(k);
+                NbBois nbkey=nb.get(k);
                 int j=k;
                 while(j>0 && ((b.get(j-1).dimensions.longueur>cle) || ( b.get(j-1).dimensions.longueur==cle && b.get(j-1).dimensions.largeur>cle2))){
                     System.out.println(b.get(j-1).dimensions.longueur);
                     b.set(j,b.get(j-1));
+                    p.set(j,p.get(j-1));
+                    nb.set(j,nb.get(j-1));
                     j=j-1;
                     affiche_list(listClient);
                 }
                 b.set(j,key);
+                p.set(j,pkey);
+                nb.set(j,nbkey);
                 affiche_list(listClient);
             }
             ((Client) listClient.get(i)).bois=b;
@@ -372,6 +382,7 @@ class Algo{
                             System.out.println("Ajouter a la découpe panneau id : " + ((Fournisseur) listF.get(k)).bois.get(ind).id + " planche id : " + ((Client) listC.get(0)).bois.get(0).id);
                             //((Fournisseur) listF.get(k)).nombreBois.get(ind).nombre--;
                             ((Client) listC.get(0)).nombreBois.get(0).nombre--;
+                            System.out.println("nb bois "+((Client) listC.get(0)).nombreBois.get(0).nombre + "pour id : "+((Client) listC.get(0)).bois.get(0).id);
                             if (((Fournisseur) listF.get(k)).nombreBois.get(ind).nombre == 0) {
                                 ((Fournisseur) listF.get(k)).nombreBois.remove(ind);
                                 ((Fournisseur) listF.get(k)).bois.remove(ind);

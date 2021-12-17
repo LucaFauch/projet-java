@@ -33,19 +33,33 @@ public class XmlWrite {
 
             int clientCourant=l.get(0).idClient;
             int fournisseurCourant=l.get(0).idFournisseur;
+            int plancheCourante = l.get(0).idPlanche;
+            int panneauCourrant = l.get(0).idPanneau;
             int compteurPlanche=0;
             int compteurPanneau=0;
 
             for (Dcoupe d : l) {
-                if(d.idClient==clientCourant && d.x==0 && d.y==0){
-                    compteurPanneau++;
-                }else{
+                if (d.idClient != clientCourant){
+                    clientCourant=d.idClient;
+                    compteurPlanche=1;
+                }
+                if (d.idPlanche != plancheCourante){
+                    plancheCourante=d.idPlanche;
+                    compteurPlanche=1;
+                }
+                else {
+                    compteurPlanche++;
+                }
+                if (d.idFournisseur != fournisseurCourant){
+                    fournisseurCourant=d.idFournisseur;
                     compteurPanneau=1;
                 }
-                if(d.idFournisseur==fournisseurCourant){
-                    compteurPlanche++;
-                }else{
-                    compteurPlanche=1;
+                if (d.idPanneau != panneauCourrant){
+                    panneauCourrant = d.idPanneau;
+                    compteurPanneau=1;
+                }
+                if (d.x==0 && d.y==0){
+                    compteurPanneau++;
                 }
                 decoupe=doc.createElement("decoupe");
 
