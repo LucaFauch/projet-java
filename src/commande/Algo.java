@@ -189,7 +189,7 @@ class Algo{
 
 
     /**
-     * Méthode réalisant la découpe pour l'étape 1
+     * Méthode permettant de vérifier si une Decoupe est conforme
      *
      * @param listC : list d'objets de la classe Client
      * @param listF : list d'objets de la classe Fournisseur
@@ -241,6 +241,14 @@ class Algo{
             }
         }
     }
+
+
+    /**
+     * Méthode réalisant la découpe avec l'algorithme de l'étape 2
+     *
+     * @param listC : list d'objets de la classe Client
+     * @param listF : list d'objets de la classe Fournisseur
+     */
     public ArrayList<Dcoupe> Etape2 (ArrayList <Generable> listC, ArrayList<Generable> listF) {
         listC = remove_client_zeros(listC);
         listF = remove_fournisseur_zeros(listF);
@@ -308,7 +316,12 @@ class Algo{
         return listDcoupe;
     }
 
-
+    /**
+     * Méthode réalisant la découpe avec le premier algorithme de l'étape 3
+     *
+     * @param listC : list d'objets de la classe Client
+     * @param listF : list d'objets de la classe Fournisseur
+     */
 
     public ArrayList<Dcoupe> Etape3_1 (ArrayList <Generable> listC, ArrayList<Generable> listF) {
         listC = remove_client_zeros(listC);
@@ -385,6 +398,14 @@ class Algo{
         this.listDcoupe=listDcoupe;
         return listDcoupe;
     }
+
+    /**
+     * Méthode réalisant la découpe avec le second algorithme de l'étape 3
+     *
+     * @param listC : list d'objets de la classe Client
+     * @param listF : list d'objets de la classe Fournisseur
+     */
+
 
     public ArrayList<Dcoupe> Etape3_2 (ArrayList <Generable> listC, ArrayList<Generable> listF) {
         listC = remove_client_zeros(listC);
@@ -481,16 +502,4 @@ class Algo{
         this.listDcoupe=listDcoupe;
         return listDcoupe;
     }
-
-
-    /*order_dcoupe(ArrayList<Dcoupe> listDcoupe){
-
-
-
-    }
-
-
-    /*public ArrayList<Integer> AlgoEtapeUne(ArrayList<Client> listClient, ArrayList<Fournisseur> listFournisseur){
-
-    }*/
 }

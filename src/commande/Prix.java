@@ -15,6 +15,10 @@ class Prix implements Validable,Generable{
         }
     }
 
+    /** Constructeur de la classe Prix
+     * @throws IllegalArgumentException : si le prix n'est pas correct
+     * @param prix
+     */
     Prix(float prix){
         try {
             if (prix <=0)
