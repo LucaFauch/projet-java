@@ -121,8 +121,8 @@ public class XmlWrite {
             firstElement = doc.createElement("svg");
             firstElement.setAttribute("version", "1.1");
             firstElement.setAttribute("xmlns", "http://www.w3.org/2000/svg");
-            firstElement.setAttribute("width", String.valueOf(l.get(0).largeurPanneau*10));
-            firstElement.setAttribute("height", String.valueOf(l.get(0).longueurPanneau*10));
+            firstElement.setAttribute("width", String.valueOf(l.get(0).largeurPanneau));
+            firstElement.setAttribute("height", String.valueOf(l.get(0).longueurPanneau));
 
             doc.appendChild(firstElement);
         }catch(ParserConfigurationException e){
@@ -130,17 +130,18 @@ public class XmlWrite {
         }    
 
         int panneauCourant=l.get(0).idPanneau;
-
+        int numPanneau=0;
         for(Dcoupe d : l){
             try{
-                if(d.idPanneau!=panneauCourant){
+                if(d.idPanneau!=panneauCourant||(d.x==0&&d.y==0)){
+                    numPanneau++;
                     try{
                         Transformer t = TransformerFactory.newInstance().newTransformer();
                         t.setOutputProperty(OutputKeys.INDENT, "yes");
                         t.setOutputProperty(OutputKeys.METHOD, "xml");
                         t.setOutputProperty(OutputKeys.ENCODING, "UTF-8");
         
-                        t.transform(new DOMSource(doc), new StreamResult(new FileOutputStream(dossier+"/panneau"+String.valueOf(panneauCourant)+".svg")));
+                        t.transform(new DOMSource(doc), new StreamResult(new FileOutputStream(dossier+"/panneau"+String.valueOf(panneauCourant)+"-"+String.valueOf(numPanneau)+".svg")));
                     }
                     catch(TransformerException e){
                         System.out.println(e.getMessage());
@@ -156,18 +157,18 @@ public class XmlWrite {
                     firstElement = doc.createElement("svg");
                     firstElement.setAttribute("version", "1.1");
                     firstElement.setAttribute("xmlns", "http://www.w3.org/2000/svg");
-                    firstElement.setAttribute("width", String.valueOf(d.largeurPanneau*10));
-                    firstElement.setAttribute("height", String.valueOf(d.longueurPanneau*10));
+                    firstElement.setAttribute("height", String.valueOf(d.largeurPanneau));
+                    firstElement.setAttribute("width", String.valueOf(d.longueurPanneau));
 
                     doc.appendChild(firstElement);
                 }
 
                 rectangle=doc.createElement("rect");
-                rectangle.setAttribute("x", String.valueOf(d.x*10));
-                rectangle.setAttribute("y", String.valueOf(d.y*10));
+                rectangle.setAttribute("x", String.valueOf(d.x));
+                rectangle.setAttribute("y", String.valueOf(d.y));
                 firstElement.setAttribute("xmlns", "http://www.w3.org/2000/svg");
-                rectangle.setAttribute("width", String.valueOf(d.largeurPlanche*10));
-                rectangle.setAttribute("height", String.valueOf(d.longueurPlanche*10));
+                rectangle.setAttribute("height", String.valueOf(d.largeurPlanche));
+                rectangle.setAttribute("width", String.valueOf(d.longueurPlanche));
                 Random rand = new Random();
                 String r=String.valueOf(rand.nextInt(256));
                 String g=String.valueOf(rand.nextInt(256));
@@ -187,7 +188,7 @@ public class XmlWrite {
             t.setOutputProperty(OutputKeys.METHOD, "xml");
             t.setOutputProperty(OutputKeys.ENCODING, "UTF-8");
 
-            t.transform(new DOMSource(doc), new StreamResult(new FileOutputStream(dossier+"/panneau"+String.valueOf(panneauCourant)+".svg")));
+            t.transform(new DOMSource(doc), new StreamResult(new FileOutputStream(dossier+"/panneau"+String.valueOf(panneauCourant)+"-"+String.valueOf(numPanneau)+".svg")));
         }
         catch(TransformerException e){
             System.out.println(e.getMessage());
