@@ -410,6 +410,7 @@ class Algo{
     }
 
     public ArrayList<Dcoupe> Etape3_2 (ArrayList <Generable> listC, ArrayList<Generable> listF) {
+        System.out.println("------------------ EXECUTION DE L'ALGO 2 DE L'ETAPE 3---------------------");
         listC = remove_client_zeros(listC);
         listF = remove_fournisseur_zeros(listF);
         listC=order_list_client(listC);
@@ -511,10 +512,7 @@ class Algo{
 
 
 
-    }
-
-
-    /*public ArrayList<Integer> AlgoEtapeUne(ArrayList<Client> listClient, ArrayList<Fournisseur> listFournisseur){
-
     }*/
+
+
 }
