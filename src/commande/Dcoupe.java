@@ -20,14 +20,14 @@ public class Dcoupe implements Generable{
     /** Constructeur de la classe Dcoupe permettant de créer un objet Dcoupe, utilisé pour créer le fichier SVG
      * @param idFournisseur
      * @param idPanneau
-     * @param largeurPanneau
-     * @param longueurPanneau
+     * @param largeurPanneau : largeur du panneau appartenant au Fournisseur
+     * @param longueurPanneau : longueur du panneau appartenant au Fournissueur
      * @param idClient
      * @param idPlanche
-     * @param largeurPlanche
-     * @param longueurPlanche
-     * @param x
-     * @param y
+     * @param largeurPlanche : largeur de la planche appartenant au Client
+     * @param longueurPlanche : longueur de la planche appartenant au Client
+     * @param x : position de la planche par rapport au panneau sur l'axe des x
+     * @param y  : position de la planche par rapport au panneau sur l'axe des y
      */
     Dcoupe (int idFournisseur,int idPanneau,int largeurPanneau,int longueurPanneau,int idClient,int idPlanche,int largeurPlanche,int longueurPlanche,int x,int y){
         this.idClient=idClient;
