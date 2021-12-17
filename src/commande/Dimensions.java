@@ -4,7 +4,7 @@ package commande;
  * @see Bois
  * */
 
-public class Dimensions implements Validable,Generable{
+class Dimensions implements Validable,Generable{
     int longueur;
     int largeur;
 
@@ -28,15 +28,30 @@ public class Dimensions implements Validable,Generable{
 
     Dimensions(int longueur, int largeur) {
         try {
-            if (longueur < 0 || largeur < 0 || longueur < largeur)
-                throw new IllegalArgumentException("Les longueurs et largeurs doivent être strictement positives et la longueur doit etre plus grande que la largeur.");
+            if (longueur<0){
+                throw new IllegalArgumentException("La longueur suivante doit être strictement positive : "+longueur);
+            }
+            else if (largeur<0){
+                throw new IllegalArgumentException("La largeur suivante doit être strictement positive : "+largeur);
+            }
+            else if (longueur<largeur){
+                throw new IllegalArgumentException("La longueur "+longueur+" doit être strictement plus grande que la largeur "+largeur);
+            }
             else {
                 this.longueur = longueur;
                 this.largeur = largeur;
             }
         }
         catch(IllegalArgumentException e) {
-            System.out.println("Les longueurs et largeurs doivent être strictement positives et la longueur doit etre plus grande que la largeur.");
+            if (longueur<0){
+                System.out.println("La longueur suivante doit être strictement positive : "+longueur);
+            }
+            else if (largeur<0){
+                System.out.println("La largeur suivante doit être strictement positive : "+largeur);
+            }
+            else{
+                System.out.println("La longueur "+longueur+" doit être strictement plus grande que la largeur "+largeur);
+            }
         }
 
     }

@@ -106,8 +106,8 @@ public class XmlWrite {
             
             firstElement = doc.createElement("svg");
             firstElement.setAttribute("version", "1.1");
-            firstElement.setAttribute("width", String.valueOf(l.get(0).widthPanneau*10));
-            firstElement.setAttribute("height", String.valueOf(l.get(0).heightPanneau*10));
+            firstElement.setAttribute("width", String.valueOf(l.get(0).largeurPanneau*10));
+            firstElement.setAttribute("height", String.valueOf(l.get(0).longueurPanneau*10));
 
             doc.appendChild(firstElement);
         }catch(ParserConfigurationException e){
@@ -140,8 +140,8 @@ public class XmlWrite {
                     
                     firstElement = doc.createElement("svg");
                     firstElement.setAttribute("version", "1.1");
-                    firstElement.setAttribute("width", String.valueOf(d.widthPanneau*10));
-                    firstElement.setAttribute("height", String.valueOf(d.heightPanneau*10));
+                    firstElement.setAttribute("width", String.valueOf(d.largeurPanneau*10));
+                    firstElement.setAttribute("height", String.valueOf(d.longueurPanneau*10));
         
                     doc.appendChild(firstElement);
                 }
@@ -149,8 +149,8 @@ public class XmlWrite {
                 rectangle=doc.createElement("rect");
                 rectangle.setAttribute("x", String.valueOf(d.x*10));
                 rectangle.setAttribute("y", String.valueOf(d.y*10));
-                rectangle.setAttribute("width", String.valueOf(d.widthPlanche*10));
-                rectangle.setAttribute("height", String.valueOf(d.heightPlanche*10));
+                rectangle.setAttribute("width", String.valueOf(d.largeurPlanche*10));
+                rectangle.setAttribute("height", String.valueOf(d.longueurPlanche*10));
                 Random rand = new Random();
                 String r=String.valueOf(rand.nextInt(256));
                 String g=String.valueOf(rand.nextInt(256));
