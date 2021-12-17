@@ -7,6 +7,9 @@ import ui.XmlWrite;
 
 import static ui.XmlRead.readXml;
 
+/** Classe Decoupe permettant de lancer le programme et de créer un objet de type Dcoupe
+ * @see Dcoupe
+ * */
 class Decoupe {
 
 
@@ -20,13 +23,13 @@ class Decoupe {
         listFournisseur = readXml(args[1],f);
         listDecoupe = readXml(args[2],f);
 
-        int type = 1;
+        int type = 4;
         Algo test = new Algo(type,listClient,listFournisseur,listDecoupe);
         //CHANGER LA LISTE CLIENT ET FOURNISSEUR DE XML READ
-        if (type >1) {
+        /*if (type >1) {
             XmlWrite.writeXML(test.listDcoupe);
             XmlWrite.writeSVG(test.listDcoupe);
-        }
+        }*/
     }
 
 }

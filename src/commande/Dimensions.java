@@ -1,8 +1,14 @@
 package commande;
 
+/** Classe Dimension, qui correspond aux dimensions d'un objet de classe Bois (planche/panneau)
+ * @see Bois
+ * */
+
 public class Dimensions implements Validable,Generable{
     int longueur;
     int largeur;
+
+    /** Vérification d'erreur de la classe NbBois*/
 
     public int isValid(){
         if (this.longueur < 0 || this.largeur < 0 || this.longueur < this.largeur){

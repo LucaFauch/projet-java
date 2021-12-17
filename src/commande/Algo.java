@@ -4,8 +4,15 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+/** Classe Algo, permettant de réaliser la découpe des planches  de chaque Client pour tous les panneaux disponibles chez les fournisseurs
+ *  Chaque algorithme renvoie une liste de découpe de la classe Dcoupe
+ *  @see Dcoupe
+ */
+
 class Algo{
     ArrayList<Dcoupe> listDcoupe;
+
+
 
     Algo(int type,ArrayList <Generable> listC, ArrayList<Generable> listF,ArrayList<Generable> listD){
         if (type==1){
@@ -15,10 +22,21 @@ class Algo{
             this.listDcoupe=Etape2( listC, listF);
         }
         if (type==3){
-            this.listDcoupe=Etape3(listC, listF);
+            this.listDcoupe=Etape3_1(listC, listF);
         }
+        if (type==4){
+            this.listDcoupe=Etape3_2(listC, listF);
+        }
+        //order_dcoupe(listDcoupe);
     }
 
+
+    /** Méthode permettant d'afficher toutes les planches avec
+     *  leur dimensions (Longueur 1ère ligne, largeur 2nde ligne)
+     *  pour chaque client
+     *  @param listClient : liste d'objets de classe Client
+     *  @see Client
+     */
     public static void print_list(ArrayList<Generable> listClient){
         Client c=(Client)listClient.get(0);
         ArrayList<Bois> b=c.bois;
@@ -35,6 +53,11 @@ class Algo{
             System.out.println(" ");
         }
     }
+
+    /** Méthode permettant de supprimer toutes les planches dont une des dimensions vaut 0
+     *  @param listFournisseur : liste d'objets de classe Client
+     *  @see Fournisseur
+     */
 
     ArrayList<Generable> remove_fournisseur_zeros (ArrayList<Generable> listFournisseur) {
         Fournisseur c=(Fournisseur)listFournisseur.get(0);
@@ -85,6 +108,11 @@ class Algo{
         return listFournisseur;
     }
 
+    /** Méthode permettant de supprimer toutes les planches dont une des dimensions vaut 0
+     *  @param listClient : liste d'objets de classe Client
+     *  @see Client
+     */
+
     ArrayList<Generable> remove_client_zeros (ArrayList<Generable> listClient) {
         Client c=(Client)listClient.get(0);
         ArrayList<Bois> b=c.bois;
@@ -131,6 +159,11 @@ class Algo{
         return listClient;
     }
 
+    /** Méthode permettant de ranger léxicographiquement les panneaux pour chaque client de listClient
+     *  @param listClient : liste d'objets de classe Client
+     *  @see Client
+     */
+
     ArrayList<Generable> order_list_client(ArrayList<Generable> listClient){
         ArrayList<Bois> b;
         for (int i=0;i<listClient.size();i++){
@@ -151,8 +184,17 @@ class Algo{
             }
             ((Client) listClient.get(i)).bois=b;
         }
+        return listClient;
     }
 
+
+    /**
+     * Méthode réalisant la découpe pour l'étape 1
+     *
+     * @param listC : list d'objets de la classe Client
+     * @param listF : list d'objets de la classe Fournisseur
+     * @param listD : list d'objets de la classe Découpe
+     */
 
     void Etape1 (ArrayList<Generable> listC, ArrayList<Generable>listF,ArrayList<Generable>listD){
         listC = remove_client_zeros(listC);
@@ -268,7 +310,7 @@ class Algo{
 
 
 
-    public ArrayList<Dcoupe> Etape3 (ArrayList <Generable> listC, ArrayList<Generable> listF) {
+    public ArrayList<Dcoupe> Etape3_1 (ArrayList <Generable> listC, ArrayList<Generable> listF) {
         listC = remove_client_zeros(listC);
         listF = remove_fournisseur_zeros(listF);
         ArrayList<Dcoupe> listDcoupe = new ArrayList<>();
@@ -276,8 +318,10 @@ class Algo{
         Bois bois;
         int ind;
         int k=0;
-        int count=0;
+        int count=0;            //Position sur x sur le panneau
         int stop_boucle=0;
+        System.out.println("-----------------------------------------------");
+
         while (listC.size()>=1 && listF.size()>=1){
             ind=0;
             for (int i=0;i<((Client) listC.get(0)).nombreBois.get(0).nombre;i++){
@@ -342,29 +386,108 @@ class Algo{
         return listDcoupe;
     }
 
-    /*public optimise(List <Client> listC, List<Fournisseur> listF){
-        for (Client value : listC) {
-            //Ordonner selon la Longueur puis la largeur
-            // https://www.codejava.net/java-core/collections/sorting-arrays-examples-with-comparable-and-comparator
-        }
+    public ArrayList<Dcoupe> Etape3_2 (ArrayList <Generable> listC, ArrayList<Generable> listF) {
+        listC = remove_client_zeros(listC);
+        listF = remove_fournisseur_zeros(listF);
+        ArrayList<Dcoupe> listDcoupe = new ArrayList<>();
+        ArrayList<Bois> b = ((Client)listC.get(0)).bois;
+        Bois bois;
+        int ind;
+        int k=0;
+        int count=0;            //Position sur x sur le panneau
+        int stop_boucle=0;
+        int larg_act=0;         //Position actuelle sur y sur le panneau
+        int larg_max=0;         //Position max sur y sur le panneau
+        System.out.println("-----------------------------------------------");
 
-        int i = 0;
-        int k = 0;
-        int j = 0;
-        for (Client value : listC) {
-            int coordL=0;
+        while (listC.size()>=1 && listF.size()>=1){
+            ind=0;
+            for (int i=0;i<((Client) listC.get(0)).nombreBois.get(0).nombre;i++){
+                System.out.println("longueur planche client " + (((Client)listC.get(0)).bois.get(0).dimensions.longueur+count) );
+                System.out.println("longueur planche fournisseur " + ((Fournisseur) listF.get(k)).bois.get(ind).dimensions.longueur );
+                System.out.println("largeur planche client " + (((Client)listC.get(0)).bois.get(0).dimensions.largeur+larg_act) );
+                System.out.println("largeur planche fournisseur " + ((Fournisseur) listF.get(k)).bois.get(ind).dimensions.largeur );
+                if (((Fournisseur) listF.get(k)).bois.get(ind).dimensions.longueur >= ((Client)listC.get(0)).bois.get(0).dimensions.longueur+count && ((Fournisseur) listF.get(k)).bois.get(ind).dimensions.largeur >= ((Client)listC.get(0)).bois.get(0).dimensions.largeur+larg_act) {
+                    if (((Fournisseur) listF.get(k)).nombreBois.get(ind).nombre>=1 && ((Client)listC.get(0)).nombreBois.get(0).nombre>=1 ){
+                        Dcoupe Decoupe2Do = new Dcoupe(((Fournisseur) listF.get(k)).id, ((Fournisseur) listF.get(k)).bois.get(ind).id, ((Fournisseur) listF.get(k)).bois.get(ind).dimensions.largeur, ((Fournisseur) listF.get(k)).bois.get(ind).dimensions.longueur, ((Client) listC.get(0)).id, ((Client) listC.get(0)).bois.get(0).id, ((Client) listC.get(0)).bois.get(0).dimensions.largeur, ((Client) listC.get(0)).bois.get(0).dimensions.longueur, count, 0);
+                        listDcoupe.add(Decoupe2Do);
+                        count=count+((Client) listC.get(0)).bois.get(0).dimensions.longueur;
+                        System.out.println("Ajouter a la découpe panneau id : "+((Fournisseur) listF.get(k)).bois.get(ind).id+" planche id : "+((Client) listC.get(0)).bois.get(0).id);
+                        ((Fournisseur) listF.get(k)).nombreBois.get(ind).nombre--;
+                        ((Client)listC.get(0)).nombreBois.get(0).nombre--;
+                        if(((Client)listC.get(0)).bois.get(0).dimensions.largeur>larg_max){
+                            larg_max=((Client)listC.get(0)).bois.get(0).dimensions.largeur;
+                            System.out.println("larg_max "+larg_max);
+                        }
+                        if (((Fournisseur) listF.get(k)).nombreBois.get(ind).nombre == 0){
+                            ((Fournisseur) listF.get(k)).nombreBois.remove(ind);
+                            ((Fournisseur) listF.get(k)).bois.remove(ind);
+                            larg_act=0;
+                            larg_max=0;
+                            count=0;
+                            stop_boucle =1;
+                        }
+                        if (((Client)listC.get(0)).nombreBois.get(0).nombre == 0){
+                            ((Client)listC.get(0)).nombreBois.remove(0);
+                            ((Client)listC.get(0)).bois.remove(0);
+                            stop_boucle =1;
+                        }
+                        if (stop_boucle == 1){
+                            System.out.println("je break");
+                            stop_boucle=0;
+                            break;
+                        }
+                    }
+                }
 
-            while(coordL<=listF.get(i).bois.get(k).dimensions.longueur){
+                else if(((Fournisseur) listF.get(k)).bois.get(ind).dimensions.longueur < ((Client)listC.get(0)).bois.get(0).dimensions.longueur+count && ((Fournisseur) listF.get(k)).bois.get(ind).dimensions.largeur >= ((Client)listC.get(0)).bois.get(0).dimensions.largeur+larg_act) {
+                    count=0;
+                    larg_act=larg_act+larg_max;
+                    System.out.println("larg_act "+larg_act);
+                    larg_max=0;
+                }
 
-
-                coordL=coordL+value.bois(j).dimensions.longueur;
+                else{
+                    ind++;
+                    i--;
+                    count=0;
+                    larg_act=0;
+                    larg_max=0;
+                }
+                if (ind == ((Fournisseur) listF.get(k)).bois.size()){
+                    ind=0;
+                    k++;
+                }
+                if (k == listF.size()){
+                    System.out.println(" il n'y a pas de panneau possible pour cette planche");
+                    ((Client)listC.get(0)).nombreBois.remove(0);
+                    ((Client)listC.get(0)).bois.remove(0);
+                    k=0;
+                }
             }
+            if (((Client) listC.get(0)).nombreBois.size()==0){
+                listC.remove(0);
+            }
+            if (((Fournisseur)listF.get(k)).nombreBois.size()==0){
+                System.out.println("j enleve un fournisseur");
+                listF.remove(k);
+            }
+            //ind++;
         }
+        for (int j=0;j<listDcoupe.size();j++) {
+            System.out.println("planche id " +listDcoupe.get(j).idPlanche+ " longueur planche "+listDcoupe.get(j).heightPlanche+" largeur "+listDcoupe.get(j).widthPlanche + " id panneau "+listDcoupe.get(j).idPanneau+" longueur panneau "+listDcoupe.get(j).heightPanneau+" largeur panneau "+listDcoupe.get(j).widthPanneau+ "     x="+listDcoupe.get(j).x+"  y="+listDcoupe.get(j).y);
+        }
+        System.out.println(listDcoupe.size());
+        this.listDcoupe=listDcoupe;
+        return listDcoupe;
+    }
+
+
+    /*order_dcoupe(ArrayList<Dcoupe> listDcoupe){
 
 
 
-        return listD;
-    }*/
+    }
 
 
     /*public ArrayList<Integer> AlgoEtapeUne(ArrayList<Client> listClient, ArrayList<Fournisseur> listFournisseur){

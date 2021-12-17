@@ -1,8 +1,12 @@
 package commande;
 
+/** Classe Prix, correspondant au prix de chaque Bois */
 class Prix implements Validable,Generable{
     float prix;
 
+    /** Vérification d'erreur de la classe Prix
+     * @see InvalidePrix
+     * */
     public int isValid(){
         if(this.prix<0){
             return 0;

@@ -1,17 +1,12 @@
 package commande;
 
+/** Classe Planche, qui est le type de Bois manipulé par les clients */
 class Planche extends Panneau implements Generable{
     int id;
 
+    /** Constructeur de la classe Planche */
     Planche(Dimensions dimensions, int id){
         super(dimensions,id);
     }
-    
-    // Planche(Dimensions dimensions,int id,int nombre,int date,float prix){
-    //     super(dimensions);
-    //     this.date=date;
-    //     this.id=id;
-    //     this.prix=prix;
-    //     this.nombre=nombre;
-    // }
+
 }

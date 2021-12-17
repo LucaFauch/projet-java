@@ -10,6 +10,10 @@ class Personne implements Validable{
     ArrayList<NbBois> nombreBois;
     ArrayList<Date> date;
 
+
+    /** Vérification d'erreur  sur l'id de la classe Personne
+     * @see InvalideId
+     * */
     public int isValid(){
         if(id<0){
             return 0;
@@ -18,6 +22,13 @@ class Personne implements Validable{
         }
     }
 
+    /** Constructeur de la classe Personne, qui peut être un Client ou un Fournisseur
+     * @param id l'id de la personne, doit être unique
+     * @param prix la liste des objets de classe Prix de chaque planche/panneau
+     * @param bois la liste des objets de classe Bois correspondant à chaque planche/panneau
+     * @param nombreBois la liste des objets de classe NbBois correspondant au nombre de planche/panneau de la même taille
+     * @param date la liste des objets de classe Date correspondant à chaque planche/panneau
+     * */
     Personne(int id, ArrayList<Prix> prix, ArrayList<Bois>  bois, ArrayList<NbBois> nombreBois, ArrayList<Date> date) throws InvalideId{
         this.id=id;
         this.prix=prix;

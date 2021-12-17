@@ -1,6 +1,9 @@
 package commande;
 import commande.NbBois;
 
+/** Classe InvalideNbBois, permettant de vérifier si un NbBois est correct et renvoyant un message dans la console
+ * @see NbBois
+ * */
 
 class InvalideNbBois extends RuntimeException{
     NbBois nbBois;
