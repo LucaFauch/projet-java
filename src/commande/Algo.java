@@ -364,30 +364,34 @@ class Algo{
                 System.out.println("longueur planche client " + (((Client)listC.get(0)).bois.get(0).dimensions.longueur+count) );
                 System.out.println("longueur planche fournisseur " + ((Fournisseur) listF.get(k)).bois.get(ind).dimensions.longueur );
                 if (((Fournisseur) listF.get(k)).bois.get(ind).dimensions.longueur >= ((Client)listC.get(0)).bois.get(0).dimensions.longueur+count && ((Fournisseur) listF.get(k)).bois.get(ind).dimensions.largeur >= ((Client)listC.get(0)).bois.get(0).dimensions.largeur) {
-                    if (((Fournisseur) listF.get(k)).nombreBois.get(ind).nombre>=1 && ((Client)listC.get(0)).nombreBois.get(0).nombre>=1 ){
-                        Dcoupe Decoupe2Do = new Dcoupe(((Fournisseur) listF.get(k)).id, ((Fournisseur) listF.get(k)).bois.get(ind).id, ((Fournisseur) listF.get(k)).bois.get(ind).dimensions.largeur, ((Fournisseur) listF.get(k)).bois.get(ind).dimensions.longueur, ((Client) listC.get(0)).id, ((Client) listC.get(0)).bois.get(0).id, ((Client) listC.get(0)).bois.get(0).dimensions.largeur, ((Client) listC.get(0)).bois.get(0).dimensions.longueur, count, 0);
-                        listDcoupe.add(Decoupe2Do);
-                        count=count+((Client) listC.get(0)).bois.get(0).dimensions.longueur;
-                        System.out.println("Ajouter a la découpe panneau id : "+((Fournisseur) listF.get(k)).bois.get(ind).id+" planche id : "+((Client) listC.get(0)).bois.get(0).id);
-                        //((Fournisseur) listF.get(k)).nombreBois.get(ind).nombre--;
-                        ((Client)listC.get(0)).nombreBois.get(0).nombre--;
-                        if (((Fournisseur) listF.get(k)).nombreBois.get(ind).nombre == 0){
-                            ((Fournisseur) listF.get(k)).nombreBois.remove(ind);
-                            ((Fournisseur) listF.get(k)).bois.remove(ind);
-                            count=0;
-                            stop_boucle =1;
-                        }
-                        if (((Client)listC.get(0)).nombreBois.get(0).nombre == 0){
-                            ((Client)listC.get(0)).nombreBois.remove(0);
-                            ((Client)listC.get(0)).bois.remove(0);
-                            stop_boucle =1;
-                        }
-                        if (stop_boucle == 1){
-                            //System.out.println("je break");
-                            stop_boucle=0;
-                            break;
+                    if (dateCompare(((Client) listC.get(0)).date.get(0), ((Fournisseur) listF.get(k)).date.get(ind)) == 1) {
+                        if (((Fournisseur) listF.get(k)).nombreBois.get(ind).nombre >= 1 && ((Client) listC.get(0)).nombreBois.get(0).nombre >= 1) {
+                            Dcoupe Decoupe2Do = new Dcoupe(((Fournisseur) listF.get(k)).id, ((Fournisseur) listF.get(k)).bois.get(ind).id, ((Fournisseur) listF.get(k)).bois.get(ind).dimensions.largeur, ((Fournisseur) listF.get(k)).bois.get(ind).dimensions.longueur, ((Client) listC.get(0)).id, ((Client) listC.get(0)).bois.get(0).id, ((Client) listC.get(0)).bois.get(0).dimensions.largeur, ((Client) listC.get(0)).bois.get(0).dimensions.longueur, count, 0);
+                            listDcoupe.add(Decoupe2Do);
+                            count = count + ((Client) listC.get(0)).bois.get(0).dimensions.longueur;
+                            System.out.println("Ajouter a la découpe panneau id : " + ((Fournisseur) listF.get(k)).bois.get(ind).id + " planche id : " + ((Client) listC.get(0)).bois.get(0).id);
+                            //((Fournisseur) listF.get(k)).nombreBois.get(ind).nombre--;
+                            ((Client) listC.get(0)).nombreBois.get(0).nombre--;
+                            if (((Fournisseur) listF.get(k)).nombreBois.get(ind).nombre == 0) {
+                                ((Fournisseur) listF.get(k)).nombreBois.remove(ind);
+                                ((Fournisseur) listF.get(k)).bois.remove(ind);
+                                count = 0;
+                                stop_boucle = 1;
+                            }
+                            if (((Client) listC.get(0)).nombreBois.get(0).nombre == 0) {
+                                ((Client) listC.get(0)).nombreBois.remove(0);
+                                ((Client) listC.get(0)).bois.remove(0);
+                                stop_boucle = 1;
+                            }
+                            if (stop_boucle == 1) {
+                                //System.out.println("je break");
+                                stop_boucle = 0;
+                                break;
+                            }
                         }
                     }
+                    else
+                        ind++;
                 }
                 else if (((Fournisseur) listF.get(k)).nombreBois.get(ind).nombre>0){
                     System.out.println("Changement de planche");
@@ -413,6 +417,9 @@ class Algo{
                     ((Client)listC.get(0)).nombreBois.remove(0);
                     ((Client)listC.get(0)).bois.remove(0);
                     k=0;
+                    if (((Client)listC.get(0)).bois.size()==0){
+                        break;
+                    }
                 }
             }
             if (((Client) listC.get(0)).nombreBois.size()==0){
@@ -465,36 +472,41 @@ class Algo{
                 System.out.println(((Fournisseur) listF.get(k)).bois.size());
                 System.out.println(((Fournisseur) listF.get(k)).bois.get(ind).dimensions.longueur);
                 if (((Fournisseur) listF.get(k)).bois.get(ind).dimensions.longueur >= ((Client)listC.get(0)).bois.get(0).dimensions.longueur+count && ((Fournisseur) listF.get(k)).bois.get(ind).dimensions.largeur >= ((Client)listC.get(0)).bois.get(0).dimensions.largeur+larg_act) {
-                    if (((Fournisseur) listF.get(k)).nombreBois.get(ind).nombre>=1 && ((Client)listC.get(0)).nombreBois.get(0).nombre>=1 ){
-                        Dcoupe Decoupe2Do = new Dcoupe(((Fournisseur) listF.get(k)).id, ((Fournisseur) listF.get(k)).bois.get(ind).id, ((Fournisseur) listF.get(k)).bois.get(ind).dimensions.largeur, ((Fournisseur) listF.get(k)).bois.get(ind).dimensions.longueur, ((Client) listC.get(0)).id, ((Client) listC.get(0)).bois.get(0).id, ((Client) listC.get(0)).bois.get(0).dimensions.largeur, ((Client) listC.get(0)).bois.get(0).dimensions.longueur, count, larg_act);
-                        listDcoupe.add(Decoupe2Do);
-                        count=count+((Client) listC.get(0)).bois.get(0).dimensions.longueur;
-                        System.out.println("Ajouter a la découpe panneau id : "+((Fournisseur) listF.get(k)).bois.get(ind).id+" planche id : "+((Client) listC.get(0)).bois.get(0).id);
-                        //((Fournisseur) listF.get(k)).nombreBois.get(ind).nombre--;
-                        ((Client)listC.get(0)).nombreBois.get(0).nombre--;
-                        if(((Client)listC.get(0)).bois.get(0).dimensions.largeur>larg_max){
-                            larg_max=((Client)listC.get(0)).bois.get(0).dimensions.largeur;
-                            System.out.println("larg_max "+larg_max);
+                    if (dateCompare(((Client) listC.get(0)).date.get(0), ((Fournisseur) listF.get(k)).date.get(ind)) == 1) {
+                        if (((Fournisseur) listF.get(k)).nombreBois.get(ind).nombre >= 1 && ((Client) listC.get(0)).nombreBois.get(0).nombre >= 1) {
+                            Dcoupe Decoupe2Do = new Dcoupe(((Fournisseur) listF.get(k)).id, ((Fournisseur) listF.get(k)).bois.get(ind).id, ((Fournisseur) listF.get(k)).bois.get(ind).dimensions.largeur, ((Fournisseur) listF.get(k)).bois.get(ind).dimensions.longueur, ((Client) listC.get(0)).id, ((Client) listC.get(0)).bois.get(0).id, ((Client) listC.get(0)).bois.get(0).dimensions.largeur, ((Client) listC.get(0)).bois.get(0).dimensions.longueur, count, larg_act);
+                            listDcoupe.add(Decoupe2Do);
+                            count = count + ((Client) listC.get(0)).bois.get(0).dimensions.longueur;
+                            System.out.println("Ajouter a la découpe panneau id : " + ((Fournisseur) listF.get(k)).bois.get(ind).id + " planche id : " + ((Client) listC.get(0)).bois.get(0).id);
+                            //((Fournisseur) listF.get(k)).nombreBois.get(ind).nombre--;
+                            ((Client) listC.get(0)).nombreBois.get(0).nombre--;
+                            if (((Client) listC.get(0)).bois.get(0).dimensions.largeur > larg_max) {
+                                larg_max = ((Client) listC.get(0)).bois.get(0).dimensions.largeur;
+                                System.out.println("larg_max " + larg_max);
+                            }
+                            if (((Fournisseur) listF.get(k)).nombreBois.get(ind).nombre == 0) {
+                                System.out.println("je remove");
+                                ((Fournisseur) listF.get(k)).nombreBois.remove(ind);
+                                ((Fournisseur) listF.get(k)).bois.remove(ind);
+                                larg_act = 0;
+                                larg_max = 0;
+                                count = 0;
+                                stop_boucle = 1;
+                            }
+                            if (((Client) listC.get(0)).nombreBois.get(0).nombre == 0) {
+                                ((Client) listC.get(0)).nombreBois.remove(0);
+                                ((Client) listC.get(0)).bois.remove(0);
+                                stop_boucle = 1;
+                            }
+                            if (stop_boucle == 1) {
+                                System.out.println("je break");
+                                stop_boucle = 0;
+                                break;
+                            }
                         }
-                        if (((Fournisseur) listF.get(k)).nombreBois.get(ind).nombre == 0){
-                            System.out.println("je remove");
-                            ((Fournisseur) listF.get(k)).nombreBois.remove(ind);
-                            ((Fournisseur) listF.get(k)).bois.remove(ind);
-                            larg_act=0;
-                            larg_max=0;
-                            count=0;
-                            stop_boucle =1;
-                        }
-                        if (((Client)listC.get(0)).nombreBois.get(0).nombre == 0){
-                            ((Client)listC.get(0)).nombreBois.remove(0);
-                            ((Client)listC.get(0)).bois.remove(0);
-                            stop_boucle =1;
-                        }
-                        if (stop_boucle == 1){
-                            System.out.println("je break");
-                            stop_boucle=0;
-                            break;
-                        }
+                    }
+                    else {
+                        ind++;
                     }
                 }
                 else if(((Fournisseur) listF.get(k)).bois.get(ind).dimensions.longueur < ((Client)listC.get(0)).bois.get(0).dimensions.longueur+count && ((Fournisseur) listF.get(k)).bois.get(ind).dimensions.largeur >= ((Client)listC.get(0)).bois.get(0).dimensions.largeur+larg_max) {
@@ -522,15 +534,18 @@ class Algo{
                     larg_act=0;
                     larg_max=0;
                 }
-                /*if (ind == ((Fournisseur) listF.get(k)).bois.size()){
+                if (ind == ((Fournisseur) listF.get(k)).bois.size()){
                     ind=0;
                     k++;
-                }*/
+                }
                 if (k == listF.size()){
                     System.out.println(" il n'y a pas de panneau possible pour cette planche");
                     ((Client)listC.get(0)).nombreBois.remove(0);
                     ((Client)listC.get(0)).bois.remove(0);
                     k=0;
+                    if (((Client)listC.get(0)).bois.size()==0){
+                        break;
+                    }
                 }
             }
             if (((Client) listC.get(0)).nombreBois.size()==0){
