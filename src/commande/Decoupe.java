@@ -23,6 +23,14 @@ class Decoupe {
         listFournisseur = readXml(args[1],f);
         listDecoupe = readXml(args[2],f);
 
+        /** La variable type correspond au type d'algorithme utilisé pour réaliser la découpe
+         *  @param type = 1 : pour vérifier que le fichier decoupes.xml est correct
+         * @param type = 2 : pour réaliser la découpe comme décrite dans l'étape 2 du sujet
+         * @param type = 3 : pour réaliser la découpe comme décrite dans l'étape 3.1 du sujet
+         * @param type = 4 : pour réaliser la découpe comme décrite dans l'étape 3.2 du sujet
+         */
+
+
         int type = 4;
         Algo test = new Algo(type,listClient,listFournisseur,listDecoupe);
         if (type >1) {

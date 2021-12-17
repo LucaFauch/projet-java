@@ -67,11 +67,11 @@ class Algo{
         }
         return 1;
     }
+
     /** Méthode permettant de supprimer toutes les planches dont une des dimensions vaut 0
      *  @param listFournisseur : liste d'objets de classe Client
      *  @see Fournisseur
      */
-
     ArrayList<Generable> enleve_fournisseur_zeros (ArrayList<Generable> listFournisseur) {
         Fournisseur c=(Fournisseur)listFournisseur.get(0);
         ArrayList<Bois> b=c.bois;
