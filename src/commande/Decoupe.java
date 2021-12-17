@@ -23,13 +23,12 @@ class Decoupe {
         listFournisseur = readXml(args[1],f);
         listDecoupe = readXml(args[2],f);
 
-        int type = 4;
+        int type = 3;
         Algo test = new Algo(type,listClient,listFournisseur,listDecoupe);
-        //CHANGER LA LISTE CLIENT ET FOURNISSEUR DE XML READ
-        /*if (type >1) {
-            XmlWrite.writeXML(test.listDcoupe);
-            XmlWrite.writeSVG(test.listDcoupe);
-        }*/
+        if (type >1) {
+            XmlWrite.writeXML(".",test.listDcoupe);
+            XmlWrite.writeSVG(".",test.listDcoupe);
+        }
     }
 
 }

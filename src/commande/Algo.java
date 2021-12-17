@@ -369,7 +369,7 @@ class Algo{
                         listDcoupe.add(Decoupe2Do);
                         count=count+((Client) listC.get(0)).bois.get(0).dimensions.longueur;
                         System.out.println("Ajouter a la découpe panneau id : "+((Fournisseur) listF.get(k)).bois.get(ind).id+" planche id : "+((Client) listC.get(0)).bois.get(0).id);
-                        ((Fournisseur) listF.get(k)).nombreBois.get(ind).nombre--;
+                        //((Fournisseur) listF.get(k)).nombreBois.get(ind).nombre--;
                         ((Client)listC.get(0)).nombreBois.get(0).nombre--;
                         if (((Fournisseur) listF.get(k)).nombreBois.get(ind).nombre == 0){
                             ((Fournisseur) listF.get(k)).nombreBois.remove(ind);
@@ -388,6 +388,16 @@ class Algo{
                             break;
                         }
                     }
+                }
+                else if (((Fournisseur) listF.get(k)).nombreBois.get(ind).nombre>0){
+                    System.out.println("Changement de planche");
+                    ((Fournisseur) listF.get(k)).nombreBois.get(ind).nombre--;
+                    if (((Fournisseur) listF.get(k)).nombreBois.get(ind).nombre == 0){
+                        ((Fournisseur) listF.get(k)).nombreBois.remove(ind);
+                        ((Fournisseur) listF.get(k)).bois.remove(ind);
+                        break;
+                    }
+                    count=0;
                 }
                 else{
                     ind++;

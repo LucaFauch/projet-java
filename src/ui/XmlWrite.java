@@ -37,7 +37,7 @@ public class XmlWrite {
             int compteurPanneau=0;
 
             for (Dcoupe d : l) {
-                if(d.idClient==clientCourant){
+                if(d.idClient==clientCourant && d.x==0 && d.y==0){
                     compteurPanneau++;
                 }else{
                     compteurPanneau=1;
@@ -74,7 +74,7 @@ public class XmlWrite {
             try{
                 Transformer t = TransformerFactory.newInstance().newTransformer();
                 t.setOutputProperty(OutputKeys.INDENT, "yes");
-                t.setOutputProperty(OutputKeys.METHOD, "html");
+                t.setOutputProperty(OutputKeys.METHOD, "xml");
                 t.setOutputProperty(OutputKeys.ENCODING, "UTF-8");
 
                 t.transform(new DOMSource(doc), new StreamResult(new FileOutputStream(dossier+"/decoupes.xml")));
@@ -122,7 +122,7 @@ public class XmlWrite {
                     try{
                         Transformer t = TransformerFactory.newInstance().newTransformer();
                         t.setOutputProperty(OutputKeys.INDENT, "yes");
-                        t.setOutputProperty(OutputKeys.METHOD, "html");
+                        t.setOutputProperty(OutputKeys.METHOD, "xml");
                         t.setOutputProperty(OutputKeys.ENCODING, "UTF-8");
         
                         t.transform(new DOMSource(doc), new StreamResult(new FileOutputStream(dossier+"/panneau"+String.valueOf(panneauCourant)+".svg")));
@@ -140,6 +140,7 @@ public class XmlWrite {
                     
                     firstElement = doc.createElement("svg");
                     firstElement.setAttribute("version", "1.1");
+                    firstElement.setAttribute("xmlns", "https://www.w3.org/2000/svg?fbclid=IwAR3rIWAZW-p_ahIfo1KfkYLFXExtAB2DX6RlM-P5lf-G9KcvLh3sDDifVMc");
                     firstElement.setAttribute("width", String.valueOf(d.largeurPanneau*10));
                     firstElement.setAttribute("height", String.valueOf(d.longueurPanneau*10));
         
@@ -149,6 +150,7 @@ public class XmlWrite {
                 rectangle=doc.createElement("rect");
                 rectangle.setAttribute("x", String.valueOf(d.x*10));
                 rectangle.setAttribute("y", String.valueOf(d.y*10));
+                firstElement.setAttribute("xmlns", "https://www.w3.org/2000/svg?fbclid=IwAR3rIWAZW-p_ahIfo1KfkYLFXExtAB2DX6RlM-P5lf-G9KcvLh3sDDifVMc");
                 rectangle.setAttribute("width", String.valueOf(d.largeurPlanche*10));
                 rectangle.setAttribute("height", String.valueOf(d.longueurPlanche*10));
                 Random rand = new Random();
@@ -167,7 +169,7 @@ public class XmlWrite {
         try{
             Transformer t = TransformerFactory.newInstance().newTransformer();
             t.setOutputProperty(OutputKeys.INDENT, "yes");
-            t.setOutputProperty(OutputKeys.METHOD, "html");
+            t.setOutputProperty(OutputKeys.METHOD, "xml");
             t.setOutputProperty(OutputKeys.ENCODING, "UTF-8");
 
             t.transform(new DOMSource(doc), new StreamResult(new FileOutputStream(dossier+"/panneau"+String.valueOf(panneauCourant)+".svg")));
