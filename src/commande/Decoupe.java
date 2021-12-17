@@ -23,7 +23,7 @@ class Decoupe {
         listFournisseur = readXml(args[1],f);
         listDecoupe = readXml(args[2],f);
 
-        int type = 2;
+        int type = 4;
         Algo test = new Algo(type,listClient,listFournisseur,listDecoupe);
         //CHANGER LA LISTE CLIENT ET FOURNISSEUR DE XML READ
         /*if (type >1) {
