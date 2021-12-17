@@ -29,7 +29,7 @@ class Date implements Validable,Generable{
      * @throws InvalideDate : si jamais la date n'est pas correcte
      * */
 
-    Date(int jour, int mois, int annee) throws InvalideDate{
+    protected Date(int jour, int mois, int annee) throws InvalideDate{
         try {
             if (jour<1||jour>31||mois<1||mois>12||annee<=21)
                 throw new IllegalArgumentException("La date suivante n'existe pas ou est dans le passé : "+jour+"/"+mois+"/"+annee);

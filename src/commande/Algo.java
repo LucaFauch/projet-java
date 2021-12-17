@@ -16,16 +16,16 @@ class Algo{
 
     Algo(int type,ArrayList <Generable> listC, ArrayList<Generable> listF,ArrayList<Generable> listD){
         if (type==1){
-            Etape1(listC,listF,listD);
+            etape1(listC,listF,listD);
         }
         if (type==2){
-            this.listDcoupe=Etape2( listC, listF);
+            this.listDcoupe=etape2( listC, listF);
         }
         if (type==3){
-            this.listDcoupe=Etape3_1(listC, listF);
+            this.listDcoupe=etape3_1(listC, listF);
         }
         if (type==4){
-            this.listDcoupe=Etape3_2(listC, listF);
+            this.listDcoupe=etape3_2(listC, listF);
         }
         //order_dcoupe(listDcoupe);
     }
@@ -37,7 +37,7 @@ class Algo{
      *  @param listClient : liste d'objets de classe Client
      *  @see Client
      */
-    public static void print_list(ArrayList<Generable> listClient){
+    static void affiche_list(ArrayList<Generable> listClient){
         Client c=(Client)listClient.get(0);
         ArrayList<Bois> b=c.bois;
         for (int j=0;j<listClient.size();j++) {
@@ -55,7 +55,7 @@ class Algo{
     }
 
 
-    public int DateCompare(Date d1,Date d2){
+    int dateCompare(Date d1,Date d2){
         if (d1.annee<d2.annee) {
             return -1;
         }
@@ -72,7 +72,7 @@ class Algo{
      *  @see Fournisseur
      */
 
-    ArrayList<Generable> remove_fournisseur_zeros (ArrayList<Generable> listFournisseur) {
+    ArrayList<Generable> enleve_fournisseur_zeros (ArrayList<Generable> listFournisseur) {
         Fournisseur c=(Fournisseur)listFournisseur.get(0);
         ArrayList<Bois> b=c.bois;
         ArrayList<Prix> p=c.prix;
@@ -126,7 +126,7 @@ class Algo{
      *  @see Client
      */
 
-    ArrayList<Generable> remove_client_zeros (ArrayList<Generable> listClient) {
+    ArrayList<Generable> enleve_client_zeros (ArrayList<Generable> listClient) {
         Client c=(Client)listClient.get(0);
         ArrayList<Bois> b=c.bois;
         ArrayList<Prix> p=c.prix;
@@ -190,10 +190,10 @@ class Algo{
                     System.out.println(b.get(j-1).dimensions.longueur);
                     b.set(j,b.get(j-1));
                     j=j-1;
-                    print_list(listClient);
+                    affiche_list(listClient);
                 }
                 b.set(j,key);
-                print_list(listClient);
+                affiche_list(listClient);
             }
             ((Client) listClient.get(i)).bois=b;
         }
@@ -209,9 +209,9 @@ class Algo{
      * @param listD : list d'objets de la classe Découpe
      */
 
-    void Etape1 (ArrayList<Generable> listC, ArrayList<Generable>listF,ArrayList<Generable>listD){
-        listC = remove_client_zeros(listC);
-        listF = remove_fournisseur_zeros(listF);
+    void etape1 (ArrayList<Generable> listC, ArrayList<Generable>listF,ArrayList<Generable>listD){
+        listC = enleve_client_zeros(listC);
+        listF = enleve_fournisseur_zeros(listF);
         int i=0;
         int j=0;
         int ii=0;
@@ -238,7 +238,7 @@ class Algo{
                         throw new IllegalArgumentException("Les planches ou panneaux n'existent pas");
                     }
                 }
-                if (DateCompare(((Client) listC.get(j)).date.get(ii),((Fournisseur) listF.get(i)).date.get(jj)) == -1) {
+                if (dateCompare(((Client) listC.get(j)).date.get(ii),((Fournisseur) listF.get(i)).date.get(jj)) == -1) {
                     System.out.println("Il y'a un problème les dates ne correspondent pas (les fournisseurs livrent le panneau après le temps voulu du  client) !!!!");
                 }
                 if (((Client) listC.get(j)).prix.get(ii).prix < ((Fournisseur) listF.get(i)).prix.get(jj).prix) {
@@ -265,10 +265,10 @@ class Algo{
      * @param listC : list d'objets de la classe Client
      * @param listF : list d'objets de la classe Fournisseur
      */
-    public ArrayList<Dcoupe> Etape2 (ArrayList <Generable> listC, ArrayList<Generable> listF) {
+    public ArrayList<Dcoupe> etape2 (ArrayList <Generable> listC, ArrayList<Generable> listF) {
         System.out.println("------------------ EXECUTION DE L'ALGO DE L'ETAPE 2---------------------");
-        listC = remove_client_zeros(listC);
-        listF = remove_fournisseur_zeros(listF);
+        listC = enleve_client_zeros(listC);
+        listF = enleve_fournisseur_zeros(listF);
         ArrayList<Dcoupe> listDcoupe = new ArrayList<>();
         ArrayList<Bois> b = ((Client)listC.get(0)).bois;
         int ind;
@@ -280,7 +280,7 @@ class Algo{
                 // on ne prend pas en compte le prix car le prix offert par les clients est ridiculement grand.
                 // Sinon on rajouterai une condition ici pour le prendre en compte.
                 if (((Fournisseur) listF.get(k)).bois.get(ind).dimensions.longueur >= ((Client)listC.get(0)).bois.get(0).dimensions.longueur && ((Fournisseur) listF.get(k)).bois.get(ind).dimensions.largeur >= ((Client)listC.get(0)).bois.get(0).dimensions.largeur) {
-                    if (DateCompare(((Client) listC.get(0)).date.get(0), ((Fournisseur) listF.get(k)).date.get(ind)) == 1) {
+                    if (dateCompare(((Client) listC.get(0)).date.get(0), ((Fournisseur) listF.get(k)).date.get(ind)) == 1) {
                         if (((Fournisseur) listF.get(k)).nombreBois.get(ind).nombre >= 1 && ((Client) listC.get(0)).nombreBois.get(0).nombre >= 1) {
                             Dcoupe Decoupe2Do = new Dcoupe(((Fournisseur) listF.get(k)).id, ((Fournisseur) listF.get(k)).bois.get(ind).id, ((Fournisseur) listF.get(k)).bois.get(ind).dimensions.largeur, ((Fournisseur) listF.get(k)).bois.get(ind).dimensions.longueur, ((Client) listC.get(0)).id, ((Client) listC.get(0)).bois.get(0).id, ((Client) listC.get(0)).bois.get(0).dimensions.largeur, ((Client) listC.get(0)).bois.get(0).dimensions.longueur, 0, 0);
                             listDcoupe.add(Decoupe2Do);
@@ -330,7 +330,7 @@ class Algo{
             //ind++;
         }
         for (int j=0;j<listDcoupe.size();j++) {
-            System.out.println("planche id " +listDcoupe.get(j).idPlanche+ " longueur planche "+listDcoupe.get(j).heightPlanche+" largeur "+listDcoupe.get(j).widthPlanche + " id panneau "+listDcoupe.get(j).idPanneau+" longueur panneau "+listDcoupe.get(j).heightPanneau+" largeur panneau "+listDcoupe.get(j).widthPanneau);
+            System.out.println("planche id " +listDcoupe.get(j).idPlanche+ " longueur planche "+listDcoupe.get(j).longueurPlanche+" largeur "+listDcoupe.get(j).largeurPlanche + " id panneau "+listDcoupe.get(j).idPanneau+" longueur panneau "+listDcoupe.get(j).longueurPanneau+" largeur panneau "+listDcoupe.get(j).largeurPanneau);
         }
         System.out.println(listDcoupe.size());
         this.listDcoupe=listDcoupe;
@@ -344,10 +344,10 @@ class Algo{
      * @param listF : list d'objets de la classe Fournisseur
      */
 
-    public ArrayList<Dcoupe> Etape3_1 (ArrayList <Generable> listC, ArrayList<Generable> listF) {
+    public ArrayList<Dcoupe> etape3_1 (ArrayList <Generable> listC, ArrayList<Generable> listF) {
         System.out.println("------------------ EXECUTION DE L'ALGO 1 DE L'ETAPE 3---------------------");
-        listC = remove_client_zeros(listC);
-        listF = remove_fournisseur_zeros(listF);
+        listC = enleve_client_zeros(listC);
+        listF = enleve_fournisseur_zeros(listF);
         listC=order_list_client(listC);
         ArrayList<Dcoupe> listDcoupe = new ArrayList<>();
         ArrayList<Bois> b = ((Client)listC.get(0)).bois;
@@ -415,7 +415,7 @@ class Algo{
             //ind++;
         }
         for (int j=0;j<listDcoupe.size();j++) {
-            System.out.println("planche id " +listDcoupe.get(j).idPlanche+ " longueur planche "+listDcoupe.get(j).heightPlanche+" largeur "+listDcoupe.get(j).widthPlanche + " id panneau "+listDcoupe.get(j).idPanneau+" longueur panneau "+listDcoupe.get(j).heightPanneau+" largeur panneau "+listDcoupe.get(j).widthPanneau+ "     x="+listDcoupe.get(j).x+"  y="+listDcoupe.get(j).y);
+            System.out.println("planche id " +listDcoupe.get(j).idPlanche+ " longueur planche "+listDcoupe.get(j).longueurPlanche+" largeur "+listDcoupe.get(j).largeurPlanche + " id panneau "+listDcoupe.get(j).idPanneau+" longueur panneau "+listDcoupe.get(j).longueurPanneau+" largeur panneau "+listDcoupe.get(j).largeurPanneau+ "     x="+listDcoupe.get(j).x+"  y="+listDcoupe.get(j).y);
         }
         System.out.println(listDcoupe.size());
         this.listDcoupe=listDcoupe;
@@ -430,9 +430,9 @@ class Algo{
      */
 
 
-    public ArrayList<Dcoupe> Etape3_2 (ArrayList <Generable> listC, ArrayList<Generable> listF) {
-        listC = remove_client_zeros(listC);
-        listF = remove_fournisseur_zeros(listF);
+    public ArrayList<Dcoupe> etape3_2 (ArrayList <Generable> listC, ArrayList<Generable> listF) {
+        listC = enleve_client_zeros(listC);
+        listF = enleve_fournisseur_zeros(listF);
         listC=order_list_client(listC);
         ArrayList<Dcoupe> listDcoupe = new ArrayList<>();
         ArrayList<Bois> b = ((Client)listC.get(0)).bois;
@@ -520,7 +520,7 @@ class Algo{
             //ind++;
         }
         for (int j=0;j<listDcoupe.size();j++) {
-            System.out.println("planche id " +listDcoupe.get(j).idPlanche+ " longueur planche "+listDcoupe.get(j).heightPlanche+" largeur "+listDcoupe.get(j).widthPlanche + " id panneau "+listDcoupe.get(j).idPanneau+" longueur panneau "+listDcoupe.get(j).heightPanneau+" largeur panneau "+listDcoupe.get(j).widthPanneau+ "     x="+listDcoupe.get(j).x+"  y="+listDcoupe.get(j).y);
+            System.out.println("planche id " +listDcoupe.get(j).idPlanche+ " longueur planche "+listDcoupe.get(j).longueurPlanche+" largeur "+listDcoupe.get(j).largeurPlanche + " id panneau "+listDcoupe.get(j).idPanneau+" longueur panneau "+listDcoupe.get(j).longueurPanneau+" largeur panneau "+listDcoupe.get(j).largeurPanneau+ "     x="+listDcoupe.get(j).x+"  y="+listDcoupe.get(j).y);
         }
         System.out.println(listDcoupe.size());
         this.listDcoupe=listDcoupe;
