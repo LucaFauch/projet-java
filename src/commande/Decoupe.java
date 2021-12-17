@@ -1,6 +1,5 @@
 package commande;
 
-
 import java.util.ArrayList;
 
 import ui.XmlWrite;
@@ -19,9 +18,9 @@ class Decoupe {
         ArrayList<Generable> listClient = new ArrayList<>();
         ArrayList<Generable> listFournisseur = new ArrayList<>();
         ArrayList<Generable> listDecoupe = new ArrayList<>();
-        listClient = readXml(filename,f);
-        listFournisseur = readXml(args[1],f);
-        listDecoupe = readXml(args[2],f);
+        listClient = readXml(filename+"/clients.xml",f);
+        listFournisseur = readXml(filename+"/fournisseurs.xml",f);
+        listDecoupe = readXml(filename+"/decoupes.xml",f);
 
         /** La variable type correspond au type d'algorithme utilisé pour réaliser la découpe
          *  @param type = 1 : pour vérifier que le fichier decoupes.xml est correct
@@ -34,9 +33,8 @@ class Decoupe {
         int type = 4;
         Algo test = new Algo(type,listClient,listFournisseur,listDecoupe);
         if (type >1) {
-            XmlWrite.writeXML(".",test.listDcoupe);
-            XmlWrite.writeSVG(".",test.listDcoupe);
+            XmlWrite.writeXML(filename,test.listDcoupe);
+            XmlWrite.writeSVG(filename,test.listDcoupe);
         }
     }
-
 }
