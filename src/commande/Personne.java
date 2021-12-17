@@ -28,6 +28,8 @@ class Personne implements Validable{
      * @param bois la liste des objets de classe Bois correspondant à chaque planche/panneau
      * @param nombreBois la liste des objets de classe NbBois correspondant au nombre de planche/panneau de la même taille
      * @param date la liste des objets de classe Date correspondant à chaque planche/panneau
+     *
+     * @throws InvalideId : si jamais l'id n'est pas correct
      * */
     Personne(int id, ArrayList<Prix> prix, ArrayList<Bois>  bois, ArrayList<NbBois> nombreBois, ArrayList<Date> date) throws InvalideId{
         this.id=id;

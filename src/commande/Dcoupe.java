@@ -2,6 +2,8 @@ package commande;
 
 import java.util.ArrayList;
 
+/** Classe Dcoupe contenant toutes les informations relatives à la découpe de planche
+ */
 public class Dcoupe implements Generable{
     public int idFournisseur;
     public int idPanneau;
@@ -14,6 +16,19 @@ public class Dcoupe implements Generable{
     public int x;
     public int y;
 
+
+    /** Constructeur de la classe Dcoupe permettant de créer un objet Dcoupe, utilisé pour créer le fichier SVG
+     * @param idFournisseur
+     * @param idPanneau
+     * @param widthPanneau
+     * @param heightPanneau
+     * @param idClient
+     * @param idPlanche
+     * @param widthPlanche
+     * @param heightPlanche
+     * @param x
+     * @param y
+     */
     Dcoupe (int idFournisseur,int idPanneau,int widthPanneau,int heightPanneau,int idClient,int idPlanche,int widthPlanche,int heightPlanche,int x,int y){
         this.idClient=idClient;
         this.idPanneau=idPanneau;

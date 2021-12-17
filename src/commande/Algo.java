@@ -202,7 +202,7 @@ class Algo{
 
 
     /**
-     * Méthode réalisant la découpe pour l'étape 1
+     * Méthode permettant de vérifier si une Decoupe est conforme
      *
      * @param listC : list d'objets de la classe Client
      * @param listF : list d'objets de la classe Fournisseur
@@ -257,6 +257,14 @@ class Algo{
             }
         }
     }
+
+
+    /**
+     * Méthode réalisant la découpe avec l'algorithme de l'étape 2
+     *
+     * @param listC : list d'objets de la classe Client
+     * @param listF : list d'objets de la classe Fournisseur
+     */
     public ArrayList<Dcoupe> Etape2 (ArrayList <Generable> listC, ArrayList<Generable> listF) {
         System.out.println("------------------ EXECUTION DE L'ALGO DE L'ETAPE 2---------------------");
         listC = remove_client_zeros(listC);
@@ -329,7 +337,12 @@ class Algo{
         return listDcoupe;
     }
 
-
+    /**
+     * Méthode réalisant la découpe avec le premier algorithme de l'étape 3
+     *
+     * @param listC : list d'objets de la classe Client
+     * @param listF : list d'objets de la classe Fournisseur
+     */
 
     public ArrayList<Dcoupe> Etape3_1 (ArrayList <Generable> listC, ArrayList<Generable> listF) {
         System.out.println("------------------ EXECUTION DE L'ALGO 1 DE L'ETAPE 3---------------------");
@@ -409,8 +422,15 @@ class Algo{
         return listDcoupe;
     }
 
+    /**
+     * Méthode réalisant la découpe avec le second algorithme de l'étape 3
+     *
+     * @param listC : list d'objets de la classe Client
+     * @param listF : list d'objets de la classe Fournisseur
+     */
+
+
     public ArrayList<Dcoupe> Etape3_2 (ArrayList <Generable> listC, ArrayList<Generable> listF) {
-        System.out.println("------------------ EXECUTION DE L'ALGO 2 DE L'ETAPE 3---------------------");
         listC = remove_client_zeros(listC);
         listF = remove_fournisseur_zeros(listF);
         listC=order_list_client(listC);
@@ -506,13 +526,4 @@ class Algo{
         this.listDcoupe=listDcoupe;
         return listDcoupe;
     }
-
-
-    /*order_dcoupe(ArrayList<Dcoupe> listDcoupe){
-
-
-
-    }*/
-
-
 }
