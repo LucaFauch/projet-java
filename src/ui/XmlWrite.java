@@ -106,6 +106,7 @@ public class XmlWrite {
             
             firstElement = doc.createElement("svg");
             firstElement.setAttribute("version", "1.1");
+            firstElement.setAttribute("xmlns", "http://www.w3.org/2000/svg");
             firstElement.setAttribute("width", String.valueOf(l.get(0).largeurPanneau*10));
             firstElement.setAttribute("height", String.valueOf(l.get(0).longueurPanneau*10));
 
@@ -135,22 +136,22 @@ public class XmlWrite {
                     }
 
                     docBuilder = docBuilderFactory.newDocumentBuilder();
-                
+
                     doc = docBuilder.newDocument();
-                    
+
                     firstElement = doc.createElement("svg");
                     firstElement.setAttribute("version", "1.1");
-                    firstElement.setAttribute("xmlns", "https://www.w3.org/2000/svg?fbclid=IwAR3rIWAZW-p_ahIfo1KfkYLFXExtAB2DX6RlM-P5lf-G9KcvLh3sDDifVMc");
+                    firstElement.setAttribute("xmlns", "http://www.w3.org/2000/svg");
                     firstElement.setAttribute("width", String.valueOf(d.largeurPanneau*10));
                     firstElement.setAttribute("height", String.valueOf(d.longueurPanneau*10));
-        
+
                     doc.appendChild(firstElement);
                 }
 
                 rectangle=doc.createElement("rect");
                 rectangle.setAttribute("x", String.valueOf(d.x*10));
                 rectangle.setAttribute("y", String.valueOf(d.y*10));
-                firstElement.setAttribute("xmlns", "https://www.w3.org/2000/svg?fbclid=IwAR3rIWAZW-p_ahIfo1KfkYLFXExtAB2DX6RlM-P5lf-G9KcvLh3sDDifVMc");
+                firstElement.setAttribute("xmlns", "http://www.w3.org/2000/svg");
                 rectangle.setAttribute("width", String.valueOf(d.largeurPlanche*10));
                 rectangle.setAttribute("height", String.valueOf(d.longueurPlanche*10));
                 Random rand = new Random();
